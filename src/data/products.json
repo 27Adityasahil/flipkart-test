@@ -1,0 +1,95 @@
+[
+  {
+    "id": "1",
+    "slug": "iphone-15-pro-max",
+    "image": "https://dummyimage.com/400x500/eaeaea/5c5c5c.png&text=iPhone+15+Pro",
+    "title": "Apple iPhone 15 Pro Max (256 GB)",
+    "rating": 4.6,
+    "reviewCount": 12450,
+    "currentPrice": 149900,
+    "originalPrice": 159900,
+    "discount": 6,
+    "badge": "Bestseller",
+    "deliveryText": "Free Delivery by Tomorrow, 2 PM",
+    "highlights": [
+      "256 GB ROM",
+      "17.02 cm (6.7 inch) Super Retina XDR Display",
+      "48MP + 12MP + 12MP | 12MP Front Camera",
+      "A17 Pro Chip, 6 Core Processor"
+    ],
+    "offers": [
+      "Bank Offer: 5% Cashback on Flipkart Axis Bank Card",
+      "Special Price: Get extra ₹10000 off (price inclusive of cashback/coupon)"
+    ]
+  },
+  {
+    "id": "2",
+    "slug": "sony-wh-1000xm5",
+    "image": "https://dummyimage.com/400x500/eaeaea/5c5c5c.png&text=Sony+WH-1000XM5",
+    "title": "Sony WH-1000XM5 Wireless Headphones",
+    "rating": 4.8,
+    "reviewCount": 8920,
+    "currentPrice": 29990,
+    "originalPrice": 34990,
+    "discount": 14,
+    "badge": "Trending",
+    "deliveryText": "Free Delivery in 2 Days",
+    "highlights": [
+      "Industry Leading Noise Cancellation",
+      "30 Hours Battery Life",
+      "Quick Charge (3 min = 3 hrs playback)",
+      "Multipoint Connection"
+    ],
+    "offers": [
+      "Bank Offer: Flat ₹2000 off on HDFC Credit Card",
+      "No cost EMI ₹4,999/month"
+    ]
+  },
+  {
+    "id": "3",
+    "slug": "samsung-galaxy-watch-6",
+    "image": "https://dummyimage.com/400x500/eaeaea/5c5c5c.png&text=Galaxy+Watch",
+    "title": "SAMSUNG Galaxy Watch 6 LTE (44mm)",
+    "rating": 4.3,
+    "reviewCount": 3200,
+    "currentPrice": 22999,
+    "originalPrice": 33999,
+    "discount": 32,
+    "badge": "Special Offer",
+    "deliveryText": "Free Delivery by Wednesday",
+    "highlights": [
+      "LTE Connectivity",
+      "Advanced Sleep Coaching",
+      "Blood Pressure & ECG Monitoring",
+      "Sapphire Crystal Glass"
+    ],
+    "offers": [
+      "Bank Offer: 10% off on SBI Credit Card",
+      "Exchange Offer: Up to ₹15,000 off on exchange"
+    ]
+  },
+  {
+    "id": "4",
+    "slug": "macbook-air-m2",
+    "image": "https://dummyimage.com/400x500/eaeaea/5c5c5c.png&text=MacBook+Air",
+    "title": "APPLE MacBook Air M2 (8GB/256GB)",
+    "rating": 4.7,
+    "reviewCount": 15600,
+    "currentPrice": 89990,
+    "originalPrice": 99900,
+    "discount": 9,
+    "badge": "Top Rated",
+    "deliveryText": "Free Delivery by Friday",
+    "highlights": [
+      "Apple M2 Chip",
+      "8 GB Unified Memory",
+      "256 GB SSD",
+      "13.6 inch Liquid Retina Display",
+      "Mac OS Monterey"
+    ],
+    "offers": [
+      "Bank Offer: Flat ₹5000 Instant Discount on ICICI Cards",
+      "Partner Offer: Sign up for Flipkart Pay Later and get free Times Prime Benefits"
+    ]
+  }
+]
