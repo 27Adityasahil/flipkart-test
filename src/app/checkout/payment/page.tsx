@@ -15,7 +15,12 @@ export default function PaymentPage() {
     const [success, setSuccess] = useState(false);
 
     const handlePay = () => {
-        window.location.href = `upi://pay?pa=paytm.s1x1vd6@pty&pn=Anil%20Kumar&am=${cartTotal}&cu=INR&tn=ORDER1023`;
+        const orderId = `ORDER${Date.now()}`;
+        if (paymentMethod === 'PhonePe') {
+            window.location.href = `phonepe://pay?pa=paytm.s1x1vd6@pty&pn=Anil%20Kumar&am=${cartTotal}&cu=INR&tn=${orderId}`;
+        } else {
+            window.location.href = `upi://pay?pa=paytm.s1x1vd6@pty&pn=Anil%20Kumar&am=${cartTotal}&cu=INR&tn=${orderId}`;
+        }
     };
 
     if (success) {
