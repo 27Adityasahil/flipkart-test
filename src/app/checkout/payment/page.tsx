@@ -3,19 +3,19 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
+import { ArrowLeft, ShieldCheck, ChevronUp, ChevronDown, CreditCard, Landmark, Banknote, HelpCircle, Smile } from 'lucide-react';
+import phonepeImg from '@/assets/phonepe.png';
+import gpayImg from '@/assets/gpay.png';
+import paytmImg from '@/assets/paytm.png';
+import otherUpiImg from '@/assets/other-upi.png';
 
 export default function PaymentPage() {
     const router = useRouter();
-    const { cartTotal, paymentMethod, setPaymentMethod, clearCart } = useCart();
+    const { cartTotal, paymentMethod, setPaymentMethod, clearCart, cartCount } = useCart();
     const [success, setSuccess] = useState(false);
 
     const handlePay = () => {
-        // Dummy successful checkout
-        setSuccess(true);
-        setTimeout(() => {
-            clearCart();
-            router.push('/');
-        }, 3000);
+        window.location.href = `upi://pay?pa=paytm.s1x1vd6@pty&pn=Anil%20Kumar&am=499&cu=INR&tn=ORDER1023`;
     };
 
     if (success) {
@@ -35,78 +35,161 @@ export default function PaymentPage() {
     }
 
     const upiOptions = [
-        { id: 'phonepe', name: 'PhonePe', icon: '📱' },
-        { id: 'gpay', name: 'Google Pay', icon: 'G' },
-        { id: 'paytm', name: 'Paytm', icon: '₽' },
-        { id: 'other', name: 'Other UPI ID', icon: '↗' },
+        { id: 'phonepe', name: 'PhonePe', icon: phonepeImg },
+        { id: 'paytm', name: 'Paytm', icon: paytmImg },
+        { id: 'gpay', name: 'Google Pay', icon: gpayImg },
+        { id: 'other', name: 'Other UPI', icon: otherUpiImg },
     ];
 
     return (
-        <div className="flex flex-col">
-            <div className="bg-[#2874f0] p-3 text-white text-sm font-medium sticky top-[48px] z-10">
-                Step 3 of 3: Payment
-            </div>
-
-            <div className="bg-white p-4">
-                {/* UPI Section */}
-                <div className="border border-blue-500 rounded p-4 bg-blue-50/30 mb-4 shadow-sm relative">
-                    <div className="absolute top-0 right-0 bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded-bl rounded-tr border-l border-b border-blue-200">
-                        RECOMMENDED
-                    </div>
-                    <div className="flex items-center mb-4">
-                        <input
-                            type="radio"
-                            checked={paymentMethod.includes('UPI') || paymentMethod === 'phonepe' || paymentMethod === 'gpay'}
-                            onChange={() => setPaymentMethod('UPI')}
-                            className="w-4 h-4 text-[#2874f0]"
-                            readOnly
-                        />
-                        <label className="ml-3 font-bold text-gray-800">UPI</label>
-                    </div>
-
-                    <div className="ml-7 space-y-3">
-                        {upiOptions.map(opt => (
-                            <label key={opt.id} className="flex items-center border p-3 rounded bg-white shadow-sm cursor-pointer">
-                                <input
-                                    type="radio"
-                                    name="upiOpt"
-                                    checked={paymentMethod === opt.name}
-                                    onChange={() => setPaymentMethod(opt.name)}
-                                    className="w-4 h-4 text-[#2874f0]"
-                                />
-                                <div className="ml-3 flex items-center">
-                                    <span className="w-6 h-6 flex items-center justify-center bg-gray-100 text-xs rounded mr-2 font-bold">{opt.icon}</span>
-                                    <span className="text-sm font-medium">{opt.name}</span>
-                                </div>
-                            </label>
-                        ))}
+        <div className="flex flex-col min-h-screen bg-[#f1f3f6] pb-10">
+            {/* Header */}
+            <div className="px-4 py-3 flex items-center justify-between bg-white border-b shadow-sm sticky top-0 z-20">
+                <div className="flex items-center">
+                    <button onClick={() => router.back()} className="mr-4">
+                        <ArrowLeft className="w-6 h-6 text-black" strokeWidth={2.5} />
+                    </button>
+                    <div className="flex flex-col">
+                        <span className="text-[12px] text-gray-500 font-medium">Step 3 of 3</span>
+                        <h1 className="text-[18px] font-bold text-black leading-tight">Payments</h1>
                     </div>
                 </div>
+                <div className="flex items-center bg-gray-100 border border-gray-200 px-2 py-1 rounded text-[11px] font-medium text-gray-600">
+                    <ShieldCheck className="w-3.5 h-3.5 mr-1" strokeWidth={2} />
+                    100% Secure
+                </div>
+            </div>
 
-                {/* Disabled Other Options */}
-                <div className="space-y-4">
-                    {['Credit / Debit / ATM Card', 'Net Banking', 'Cash on Delivery (COD)'].map(opt => (
-                        <div key={opt} className="border rounded p-4 flex items-center opacity-50 cursor-not-allowed bg-gray-50">
-                            <input type="radio" disabled className="w-4 h-4" />
-                            <label className="ml-3 font-medium text-gray-600 text-sm">{opt}</label>
+            {/* Price Breakdown */}
+            <div className="bg-[#f5f7fa] px-4 py-4 border-b border-gray-200 relative overflow-hidden">
+                {/* Simulated background stripes (a bit tricky to do exactly, keeping it clean solid for now) */}
+                <div className="flex justify-between items-center text-[15px] text-gray-700 mb-2">
+                    <span>Price ({cartCount} items)</span>
+                    <span className="font-medium text-gray-900">₹{cartTotal.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between items-center text-[15px] text-gray-700 mb-4">
+                    <span>Protect Promise Fee</span>
+                    <span className="font-medium text-gray-900">₹0</span>
+                </div>
+
+                <div className="border-t border-dashed border-gray-300 my-3"></div>
+
+                <div className="flex justify-between items-center bg-[#f5f7fa]">
+                    <div className="flex items-center text-[#2874f0] font-medium text-[16px]">
+                        Total Amount <ChevronUp className="w-4 h-4 ml-1" strokeWidth={2.5} />
+                    </div>
+                    <span className="font-medium text-[#2874f0] text-[16px]">₹{cartTotal.toLocaleString()}</span>
+                </div>
+            </div>
+
+            {/* Cashback Banner */}
+            <div className="bg-[#eff8f1] px-4 py-3 border-b flex justify-between items-center relative overflow-hidden">
+                <div className="flex flex-col z-10 w-full relative">
+                    <span className="text-[#388e3c] font-bold text-[14px]">5% Cashback</span>
+                    <span className="text-[#388e3c] text-[12px]">Claim now with payment offers</span>
+                </div>
+                {/* Fake Bank Logos Placeholder to match visual structure */}
+                <div className="flex absolute right-4 top-1/2 -translate-y-1/2 space-x-[-10px] z-0">
+                    <div className="w-8 h-8 rounded-full bg-red-800 border-2 border-white shadow-sm flex items-center justify-center font-serif text-white text-[10px] italic">A</div>
+                    <div className="w-8 h-8 rounded-full bg-blue-700 border-2 border-white shadow-sm flex items-center justify-center font-bold text-white text-[10px]">SBI</div>
+                </div>
+            </div>
+
+            {/* UPI Section */}
+            <div className="bg-white mt-3 border-t border-b">
+                <div className="px-4 py-4 flex justify-between items-start border-b">
+                    <div>
+                        <div className="flex items-center">
+                            <span className="font-bold text-[15px] text-black">UPI</span>
                         </div>
+                        <div className="text-gray-500 text-[13px] mt-0.5">Pay by any UPI app</div>
+                    </div>
+                    <ChevronDown className="w-5 h-5 text-black" strokeWidth={2.5} />
+                </div>
+
+                <div className="flex flex-col">
+                    {upiOptions.map((opt, index) => (
+                        <label
+                            key={opt.id}
+                            onClick={() => setPaymentMethod(opt.name)}
+                            className="flex items-center justify-between py-3 px-4 cursor-pointer hover:bg-gray-50 transition-colors"
+                        >
+                            <div className="flex items-center">
+                                <div className="flex items-center justify-center mr-4">
+                                    <img src={opt.icon.src} alt={opt.name} className="w-[32px] h-[32px] object-contain" />
+                                </div>
+                                <span className={`text-[15px] ${paymentMethod === opt.name ? 'text-black font-medium' : 'text-gray-800'}`}>{opt.name}</span>
+                            </div>
+
+                            <div className={`w-[18px] h-[18px] rounded-full border-[1.5px] flex items-center justify-center ${paymentMethod === opt.name ? 'border-[#2874f0]' : 'border-gray-400'}`}>
+                                {paymentMethod === opt.name && <div className="w-2.5 h-2.5 bg-[#2874f0] rounded-full"></div>}
+                            </div>
+                        </label>
                     ))}
+
+                    {/* Inline Pay Button positioned immediately inside the UPI section as requested in screenshot */}
+                    <div className="p-4 bg-white border-t">
+                        <button
+                            onClick={handlePay}
+                            className="w-full bg-[#fb641b] text-black bg-gradient-to-b from-[#ffcf40] to-[#ffc200] font-bold py-3.5 rounded-sm shadow-[0_1px_2px_rgba(0,0,0,0.2)] text-[16px]"
+                        >
+                            PAY ₹{cartTotal.toLocaleString()}
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            {/* Sticky Bottom Bar */}
-            <div className="fixed bottom-0 w-full max-w-md mx-auto bg-white border-t p-3 flex justify-between items-center z-20 shadow-[0_-2px_10px_rgba(0,0,0,0.1)]">
-                <div>
-                    <div className="font-bold text-[18px] text-gray-900">₹{cartTotal.toLocaleString()}</div>
-                    <a href="#" className="text-[#2874f0] text-xs font-bold hover:underline">View Price Details</a>
+            {/* Disabled Sections */}
+            <div className="bg-[#f1f3f6] mt-3 border-t">
+                {/* Credit Card */}
+                <div className="bg-[#fafafa] px-4 py-4 border-b flex items-start justify-between">
+                    <div className="flex flex-col opacity-60">
+                        <div className="flex items-center">
+                            <CreditCard className="w-6 h-6 text-gray-500 mr-3" strokeWidth={2} />
+                            <span className="font-bold text-[15px] text-black">Credit/Debit/ATM Card</span>
+                        </div>
+                        <div className="text-gray-500 text-[12px] mt-1 ml-9">Add and secure cards as per RBI<br />guidelines</div>
+                        <div className="text-[#388e3c] text-[12px] mt-1 ml-9 font-medium">Get upto 5% cashback* • 2 offers available</div>
+                    </div>
+                    <div className="flex items-center text-gray-500 text-[13px]">
+                        Unavailable
+                        <HelpCircle className="w-3.5 h-3.5 ml-1" />
+                    </div>
                 </div>
-                <button
-                    onClick={handlePay}
-                    className="bg-[#fb641b] text-white font-bold py-3.5 px-10 rounded shadow text-[15px] hover:bg-[#e05a18]"
-                >
-                    Pay
-                </button>
+
+                {/* Net Banking */}
+                <div className="bg-[#fafafa] px-4 py-4 border-b flex justify-between items-center opacity-70">
+                    <div className="flex items-center">
+                        <Landmark className="w-6 h-6 text-gray-500 mr-3" strokeWidth={2} />
+                        <span className="font-bold text-[15px] text-black">Net Banking</span>
+                    </div>
+                    <div className="flex items-center text-gray-500 text-[13px]">
+                        Unavailable
+                        <HelpCircle className="w-3.5 h-3.5 ml-1" />
+                    </div>
+                </div>
+
+                {/* Cash on Delivery */}
+                <div className="bg-[#fafafa] px-4 py-4 border-b flex justify-between items-center opacity-70">
+                    <div className="flex items-center">
+                        <Banknote className="w-6 h-6 text-gray-500 mr-3" strokeWidth={2} />
+                        <span className="font-bold text-[15px] text-black">Cash on Delivery</span>
+                    </div>
+                    <div className="flex items-center text-gray-500 text-[13px]">
+                        Unavailable
+                        <HelpCircle className="w-3.5 h-3.5 ml-1" />
+                    </div>
+                </div>
             </div>
+
+            {/* Footer */}
+            <div className="pt-8 pb-4 flex flex-col items-center justify-center text-gray-500">
+                <p className="text-[13px] font-bold mb-3">35 Crore happy customers and counting!</p>
+                <div className="w-8 h-8 rounded-full border-2 border-gray-300 flex items-center justify-center text-gray-300">
+                    <Smile className="w-5 h-5" strokeWidth={2.5} />
+                </div>
+            </div>
+
         </div>
     );
 }

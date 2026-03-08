@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-
-const slides = [
-    "https://dummyimage.com/600x250/333333/ffffff.png&text=Mega+Sale+On+Mobiles",
-    "https://dummyimage.com/600x250/2874f0/ffffff.png&text=Up+to+50%25+Off+Electronics"
-];
+import Image from 'next/image';
+import slide1 from '@/assets/carousel-hero/1.png';
+import slide2 from '@/assets/carousel-hero/2.png';
 
 export default function Carousel() {
+    const slides = [slide1, slide2];
+
     const [current, setCurrent] = useState(0);
 
     useEffect(() => {
@@ -24,7 +24,9 @@ export default function Carousel() {
                 style={{ transform: `translateX(-${current * 100}%)` }}
             >
                 {slides.map((s, i) => (
-                    <img key={i} src={s} alt="Banner" className="w-full h-full object-cover flex-shrink-0" />
+                    <div key={i} className="relative w-full h-full flex-shrink-0">
+                        <Image src={s} alt={`Banner ${i + 1}`} fill className="object-cover" priority={i === 0} />
+                    </div>
                 ))}
             </div>
             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-2">

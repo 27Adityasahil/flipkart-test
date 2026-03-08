@@ -3,7 +3,9 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
-import { ArrowLeft, Trash2, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, Trash2, ShieldCheck, Bookmark, Zap, Truck, ChevronDown, Star } from 'lucide-react';
+import wowImg from '@/assets/wow.png';
+import fAssuredImg from '@/assets/flipkart-assured.png';
 
 export default function CartPage() {
     const router = useRouter();
@@ -48,86 +50,119 @@ export default function CartPage() {
             {/* Cart Items */}
             <div className="bg-white mt-2 border-y">
                 {cart.map((item, index) => (
-                    <div key={item.id} className={`p-4 ${index !== cart.length - 1 ? 'border-b' : ''}`}>
-                        <div className="flex gap-4">
-                            <div className="w-24 flex-shrink-0 flex flex-col items-center">
-                                <img src={item.image} alt={item.title} className="w-full h-auto object-contain mb-3" />
-                                <div className="flex items-center border rounded shadow-sm">
-                                    <button
-                                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                        className="w-8 h-8 flex items-center justify-center font-bold text-gray-600 bg-gray-50 border-r"
-                                        disabled={item.quantity <= 1}
-                                    >
-                                        -
-                                    </button>
-                                    <div className="w-10 h-8 flex items-center justify-center text-sm font-medium text-black">
-                                        {item.quantity}
+                    <div key={item.id} className="bg-white mt-2 border-b">
+                        <div className="p-4">
+                            <div className="flex gap-4">
+                                <div className="w-24 flex-shrink-0 flex flex-col items-center">
+                                    <img src={item.image} alt={item.title} className="w-full h-auto object-contain mb-3" />
+                                    <div className="relative inline-block w-full">
+                                        <select
+                                            value={item.quantity}
+                                            onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
+                                            className="w-full appearance-none bg-white border border-gray-300 text-gray-700 py-1 pl-2 pr-6 rounded shadow-sm text-sm focus:outline-none"
+                                        >
+                                            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => (
+                                                <option key={num} value={num}>Qty: {num}</option>
+                                            ))}
+                                        </select>
+                                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1 text-gray-700">
+                                            <ChevronDown className="w-4 h-4" />
+                                        </div>
                                     </div>
-                                    <button
-                                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                        className="w-8 h-8 flex items-center justify-center font-bold text-gray-600 bg-gray-50 border-l"
-                                    >
-                                        +
-                                    </button>
+                                </div>
+                                <div className="flex-1">
+                                    <h3 className="text-sm text-gray-900 font-medium line-clamp-2 leading-tight">{item.title}</h3>
+
+                                    <div className="flex items-center space-x-1.5 mt-1.5 mb-2">
+                                        <div className="flex items-center space-x-0.5 text-[#388e3c] text-xs font-bold">
+                                            <Star className="w-3 h-3 fill-[#388e3c]" />
+                                            <Star className="w-3 h-3 fill-[#388e3c]" />
+                                            <Star className="w-3 h-3 fill-[#388e3c]" />
+                                            <Star className="w-3 h-3 fill-[#388e3c]" />
+                                            <Star className="w-3 h-3 fill-[#388e3c]" />
+                                        </div>
+                                        <span className="text-gray-400 text-xs">{item.rating} ({item.reviewCount.toLocaleString()})</span>
+                                        <img src={wowImg.src} alt="WOW!" className="h-3 object-contain ml-1 grayscale opacity-60" />
+                                    </div>
+
+                                    <div className="flex items-center space-x-2">
+                                        <span className="text-[#388e3c] text-sm font-bold">↓ {item.discount}% Off</span>
+                                        <span className="text-gray-500 line-through text-xs font-medium">₹{item.originalPrice.toLocaleString()}</span>
+                                        <span className="font-bold text-lg text-black">₹{item.currentPrice.toLocaleString()}</span>
+                                    </div>
+
+                                    <div className="flex items-center text-xs mt-1 space-x-1">
+                                        <img src={wowImg.src} alt="WOW!" className="h-3 object-contain grayscale opacity-60" />
+                                        <span className="text-gray-800">Buy at <span className="font-bold">₹{item.currentPrice - 50}</span></span>
+                                    </div>
+
                                 </div>
                             </div>
-                            <div className="flex-1">
-                                <h3 className="text-sm text-gray-900 font-medium line-clamp-2">{item.title}</h3>
-                                <div className="text-xs text-gray-500 mt-1 mb-2">Seller: Flipkart Retail</div>
-                                <div className="flex items-center space-x-2">
-                                    <span className="text-gray-500 line-through text-xs">₹{item.originalPrice.toLocaleString()}</span>
-                                    <span className="font-bold text-lg text-gray-800">₹{item.currentPrice.toLocaleString()}</span>
-                                    <span className="text-green-600 text-[10px] font-bold">{item.discount}% off</span>
+
+                            <div className="mt-4 flex items-center text-[13px] text-gray-700">
+                                <div className="flex items-center font-bold mr-1 text-[#2874f0]">
+                                    <Truck className="w-4 h-4 mr-1 text-[#2874f0]" />
+                                    EXPRESS
                                 </div>
-                                {item.offers.length > 0 && (
-                                    <div className="text-[10px] text-green-600 font-medium mt-1">
-                                        {item.offers.length} offers applied
-                                    </div>
-                                )}
-                                <div className="flex items-center mt-4">
-                                    <button
-                                        onClick={() => removeFromCart(item.id)}
-                                        className="flex items-center text-gray-500 font-medium text-xs hover:text-[#2874f0] uppercase tracking-wider bg-gray-100 py-1.5 px-3 rounded"
-                                    >
-                                        <Trash2 className="w-3.5 h-3.5 mr-1.5" /> Remove
-                                    </button>
-                                </div>
+                                <span>{item.deliveryText.replace('Free Delivery ', 'Delivery ')}</span>
                             </div>
+                        </div>
+
+                        <div className="grid grid-cols-3 border-t text-[13px] font-medium text-gray-700">
+                            <button
+                                onClick={() => removeFromCart(item.id)}
+                                className="flex items-center justify-center py-3 hover:text-[#2874f0] hover:bg-gray-50 transition-colors"
+                            >
+                                <Trash2 className="w-4 h-4 mr-2" /> Remove
+                            </button>
+                            <button className="flex items-center justify-center py-3 border-l hover:text-[#2874f0] hover:bg-gray-50 transition-colors">
+                                <Bookmark className="w-4 h-4 mr-2" /> Save for later
+                            </button>
+                            <button className="flex items-center justify-center py-3 border-l hover:text-[#2874f0] hover:bg-gray-50 transition-colors">
+                                <Zap className="w-4 h-4 mr-2 fill-current" /> Buy this now
+                            </button>
                         </div>
                     </div>
                 ))}
             </div>
 
             {/* Price Details */}
-            <div className="bg-white p-4 mt-2 border-y">
-                <h3 className="font-bold text-gray-500 text-sm uppercase mb-4 tracking-wider border-b pb-3">Price Details</h3>
-                <div className="space-y-3 text-sm text-gray-800">
+            {/* Price Details */}
+            <div className="bg-white p-4 mt-2">
+                <div className="flex justify-between items-center mb-4 border-b pb-3">
+                    <h3 className="font-bold text-black text-[15px]">Price Details</h3>
+                    <ChevronDown className="w-5 h-5 text-gray-500" />
+                </div>
+
+                <div className="space-y-4 text-[14px] text-gray-800">
                     <div className="flex justify-between">
                         <span>Price ({cartCount} items)</span>
                         <span>₹{(cartTotal + discountTotal).toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between">
-                        <span>Discount</span>
-                        <span className="text-green-600 font-medium">- ₹{discountTotal.toLocaleString()}</span>
+                        <span className="text-[#388e3c]">Discount</span>
+                        <span className="text-[#388e3c] font-medium">- ₹{discountTotal.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between">
-                        <span>Delivery Charges</span>
-                        <span className="text-green-600 font-medium">Free</span>
+                        <span>Platform Fee</span>
+                        <span className="font-medium">₹0</span>
                     </div>
-                    <div className="flex justify-between font-bold text-lg border-t border-dashed pt-3 mt-3">
+                    <div className="flex justify-between font-bold text-[16px] text-black border-t border-dashed pt-4 mt-2 border-b pb-4 mb-2">
                         <span>Total Amount</span>
-                        <span className="text-gray-900">₹{cartTotal.toLocaleString()}</span>
+                        <span>₹{cartTotal.toLocaleString()}</span>
                     </div>
-                    <div className="text-green-600 font-bold text-xs pt-1">
+                    <div className="text-[#388e3c] font-bold text-[13px] pt-1">
                         You will save ₹{discountTotal.toLocaleString()} on this order
                     </div>
                 </div>
             </div>
 
             {/* Safety Badge */}
-            <div className="p-4 flex items-center text-gray-500 text-xs mb-[20px]">
-                <ShieldCheck className="w-6 h-6 mr-2 text-gray-400" />
-                Safe and Secure Payments. Easy returns. 100% Authentic products.
+            <div className="px-4 py-8 flex items-center text-gray-600 text-[13px]">
+                <ShieldCheck className="w-8 h-8 mr-3 text-gray-400 flex-shrink-0" />
+                <p>
+                    <span className="font-bold text-black">Safe and secure payments.</span> Easy returns. 100% Authentic products.
+                </p>
             </div>
 
             {/* Sticky Bottom Actions */}

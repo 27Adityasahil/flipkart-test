@@ -49,17 +49,6 @@ export default function Header() {
                 </div>
             </div>
 
-            {/* Categories Row */}
-            <div className="flex items-center justify-between px-2 pb-2 overflow-x-auto gap-4 hide-scrollbar text-[11px] font-medium whitespace-nowrap">
-                {['Mobiles', 'Fashion', 'Electronics', 'Home', 'Appliances', 'Toys'].map((cat) => (
-                    <div key={cat} className="flex flex-col items-center flex-shrink-0 cursor-pointer">
-                        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-blue-500 shadow-sm mb-1">
-                            <span className="text-xs font-bold">{cat[0]}</span>
-                        </div>
-                        <span>{cat}</span>
-                    </div>
-                ))}
-            </div>
         </header>
     );
 }

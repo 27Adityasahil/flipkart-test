@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 import { useCart, Address } from '@/context/CartContext';
 
 export default function AddressPage() {
@@ -36,86 +37,124 @@ export default function AddressPage() {
     const isFormValid = formData.fullName && formData.mobile && formData.pincode && formData.city && formData.state && formData.houseNo && formData.roadName;
 
     return (
-        <div>
-            <div className="bg-white p-4">
-                <h2 className="text-sm font-bold text-gray-800 uppercase tracking-wide mb-4">Add Delivery Address</h2>
+        <div className="flex flex-col min-h-screen bg-white pb-20">
+            {/* Header */}
+            <div className="px-4 py-3 flex items-center bg-white border-b">
+                <button onClick={() => router.back()} className="mr-3">
+                    <ArrowLeft className="w-5 h-5 text-black" />
+                </button>
+                <h1 className="text-[16px] font-bold text-black">Add delivery address</h1>
+            </div>
 
+            {/* Progress Stepper */}
+            <div className="px-4 py-6 bg-white border-b">
+                <div className="flex items-center justify-between relative max-w-[300px] mx-auto">
+                    {/* Connecting Lines */}
+                    <div className="absolute top-3 left-6 right-6 h-[1px] bg-gray-300 z-0 flex"></div>
+
+                    {/* Step 1 */}
+                    <div className="flex flex-col items-center z-10 relative bg-white px-2">
+                        <div className="w-6 h-6 rounded-full bg-[#2874f0] text-white flex items-center justify-center text-xs font-bold mb-2">1</div>
+                        <span className="text-xs text-black">Address</span>
+                    </div>
+
+                    {/* Step 2 */}
+                    <div className="flex flex-col items-center z-10 relative bg-white px-2">
+                        <div className="w-6 h-6 rounded-full bg-gray-400 text-white flex items-center justify-center text-xs font-bold mb-2">2</div>
+                        <span className="text-xs text-gray-400">Order Summary</span>
+                    </div>
+
+                    {/* Step 3 */}
+                    <div className="flex flex-col items-center z-10 relative bg-white px-2">
+                        <div className="w-6 h-6 rounded-full bg-gray-400 text-white flex items-center justify-center text-xs font-bold mb-2">3</div>
+                        <span className="text-xs text-gray-400">Payment</span>
+                    </div>
+                </div>
+            </div>
+
+            {/* Form */}
+            <div className="p-4 bg-white">
                 <div className="space-y-4">
                     <input
                         type="text"
                         name="fullName"
-                        placeholder="Full Name (Required)"
+                        placeholder="Full Name (Required)* *"
                         value={formData.fullName}
                         onChange={handleChange}
-                        className="w-full border rounded p-3 text-sm text-black placeholder-gray-500 focus:outline-blue-500 focus:border-blue-500"
+                        className="w-full border border-gray-300 rounded-sm p-3.5 text-sm text-black placeholder-gray-500 focus:outline-blue-500"
                     />
                     <input
                         type="tel"
                         name="mobile"
-                        placeholder="Phone number (Required)"
+                        placeholder="Mobile Number (Required)* *"
                         value={formData.mobile}
                         onChange={handleChange}
-                        className="w-full border rounded p-3 text-sm text-black placeholder-gray-500 focus:outline-blue-500 focus:border-blue-500"
+                        className="w-full border border-gray-300 rounded-sm p-3.5 text-sm text-black placeholder-gray-500 focus:outline-blue-500"
                     />
+                    <input
+                        type="text"
+                        name="pincode"
+                        placeholder="Pincode (Required)* *"
+                        value={formData.pincode}
+                        onChange={handleChange}
+                        className="w-full border border-gray-300 rounded-sm p-3.5 text-sm text-black placeholder-gray-500 focus:outline-blue-500"
+                    />
+
                     <div className="flex gap-4">
-                        <input
-                            type="text"
-                            name="pincode"
-                            placeholder="Pincode"
-                            value={formData.pincode}
-                            onChange={handleChange}
-                            className="w-1/2 border rounded p-3 text-sm text-black placeholder-gray-500 flex-1 focus:outline-blue-500 focus:border-blue-500"
-                        />
-                        <button className="w-1/2 bg-[#2874f0] text-white rounded font-medium text-sm flex-1 shadow-sm">
-                            Use my location
-                        </button>
-                    </div>
-                    <div className="flex gap-4">
-                        <input
-                            type="text"
-                            name="state"
-                            placeholder="State"
-                            value={formData.state}
-                            onChange={handleChange}
-                            className="border rounded p-3 text-sm text-black placeholder-gray-500 flex-1 focus:outline-blue-500 focus:border-blue-500"
-                        />
                         <input
                             type="text"
                             name="city"
-                            placeholder="City"
+                            placeholder="City (Required)* *"
                             value={formData.city}
                             onChange={handleChange}
-                            className="border rounded p-3 text-sm text-black placeholder-gray-500 flex-1 focus:outline-blue-500 focus:border-blue-500"
+                            className="w-1/2 border border-gray-300 rounded-sm p-3.5 text-sm text-black placeholder-gray-500 focus:outline-blue-500"
                         />
+                        <div className="w-1/2 relative">
+                            <select
+                                name="state"
+                                value={formData.state}
+                                onChange={handleChange}
+                                className={`w-full appearance-none border border-gray-300 rounded-sm p-3.5 text-sm focus:outline-blue-500 ${formData.state ? 'text-black' : 'text-gray-500'}`}
+                            >
+                                <option value="" disabled>State (Required)* *</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+                                <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" fillRule="evenodd"></path></svg>
+                            </div>
+                        </div>
                     </div>
+
                     <input
                         type="text"
                         name="houseNo"
-                        placeholder="House No., Building Name (Required)"
+                        placeholder="House No., Building Name (Required)* *"
                         value={formData.houseNo}
                         onChange={handleChange}
-                        className="w-full border rounded p-3 text-sm text-black placeholder-gray-500 focus:outline-blue-500 focus:border-blue-500"
+                        className="w-full border border-gray-300 rounded-sm p-3.5 text-sm text-black placeholder-gray-500 focus:outline-blue-500"
                     />
                     <input
                         type="text"
                         name="roadName"
-                        placeholder="Road name, Area, Colony (Required)"
+                        placeholder="Road name, Area, Colony (Required)* *"
                         value={formData.roadName}
                         onChange={handleChange}
-                        className="w-full border rounded p-3 text-sm text-black placeholder-gray-500 focus:outline-blue-500 focus:border-blue-500"
+                        className="w-full border border-gray-300 rounded-sm p-3.5 text-sm text-black placeholder-gray-500 focus:outline-blue-500"
                     />
                 </div>
             </div>
 
-            {/* Sticky Bottom Bar */}
-            <div className="fixed bottom-0 w-full max-w-md mx-auto bg-white border-t p-3 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] z-20">
+            {/* Bottom Bar */}
+            <div className="fixed bottom-0 w-full max-w-md mx-auto bg-white p-4 z-20">
                 <button
                     onClick={handleSave}
                     disabled={!isFormValid}
-                    className={`w-full font-bold py-3.5 px-4 rounded shadow-sm text-[15px] ${isFormValid ? 'bg-[#fb641b] text-white hover:bg-[#e05a18]' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    className={`w-full font-bold py-3.5 px-4 rounded-sm shadow text-[15px] ${isFormValid ? 'bg-[#ffc200] text-black hover:bg-[#e0ab00]' : 'bg-[#facc15] bg-opacity-60 text-black text-opacity-70 cursor-not-allowed'
                         }`}
                 >
-                    Save and Deliver Here
+                    Save Address
                 </button>
             </div>
         </div>
