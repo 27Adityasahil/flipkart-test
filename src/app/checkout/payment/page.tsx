@@ -1,100 +1,145 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
-import { ArrowLeft, ShieldCheck, ChevronUp, ChevronDown, CreditCard, Landmark, Banknote, HelpCircle, Smile } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, ChevronUp, ChevronDown, CreditCard, Landmark, Banknote, HelpCircle, Smile, Timer } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import phonepeImg from '@/assets/phonepe.png';
 import gpayImg from '@/assets/gpay.png';
 import paytmImg from '@/assets/paytm.png';
 import otherUpiImg from '@/assets/other-upi.png';
 
-/** Returns true when running on a mobile/tablet device */
+// ─── Merchant Config ──────────────────────────────────────────────────────────
+const MERCHANT = {
+    payeeName: 'ANIL KUMAR',
+    upiId: 'paytm.s1x1vd6@pty',
+    phone: '8447675802',
+    basePriceRs: 489,
+    currency: 'INR',
+};
+
+// ─── Payment Methods ──────────────────────────────────────────────────────────
+const UPI_OPTIONS = [
+    { id: 'phonepe', name: 'PhonePe', icon: phonepeImg, discountPct: 5 },
+    { id: 'paytm', name: 'Paytm', icon: paytmImg, discountPct: 3 },
+    { id: 'gpay', name: 'Google Pay', icon: gpayImg, discountPct: 4 },
+    { id: 'bhim_upi', name: 'BHIM UPI', icon: otherUpiImg, discountPct: 0 },
+];
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 function isMobile(): boolean {
     if (typeof navigator === 'undefined') return false;
     return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
 }
 
-/** Builds the UPI params WITHOUT the `am` field so the amount is editable inside the app */
-function buildUpiParams(orderId: string): string {
-    return `pa=paytm.s1x1vd6@pty&pn=Anil%20Kumar&cu=INR&tn=${orderId}`;
+function calcFinalPrice(basePriceRs: number, discountPct: number): number {
+    return basePriceRs - Math.floor(basePriceRs * discountPct / 100);
 }
 
-/** App-specific intent scheme */
-function appScheme(method: string, params: string): string {
-    if (method === 'PhonePe') return `phonepe://pay?${params}`;
-    if (method === 'Google Pay') return `tez://upi/pay?${params}`;
-    if (method === 'Paytm') return `paytmmp://pay?${params}`;
+function formatTime(s: number) {
+    const m = Math.floor(s / 60).toString().padStart(2, '0');
+    const sec = (s % 60).toString().padStart(2, '0');
+    return `${m}:${sec}`;
+}
+
+function buildDeepLink(method: string, amountRs: number): string {
+    const orderId = "TXN_" + Date.now();
+    const amPaise = amountRs * 100;
+
+    if (method === 'PhonePe') {
+        // PhonePe native P2P intent — opens payment screen directly
+        const payload = {
+            contact: {
+                vpa: MERCHANT.upiId,
+                type: 'VPA',
+            },
+            p2pPaymentCheckoutParams: {
+                note: orderId,
+                initialAmount: amPaise,   // amount in paise
+                currency: 'INR',
+                checkoutType: 'DEFAULT',
+                transactionContext: 'p2p',
+                isByDefaultKnownContact: true,  // treat as trusted contact
+            },
+        };
+        const encoded = btoa(JSON.stringify(payload));
+        return `phonepe://native?id=p2ppayment&payload=${encoded}`;
+    }
+
+    if (method === 'Paytm') {
+        return `paytmmp://cash_wallet?pa=${MERCHANT.upiId}&pn=${encodeURIComponent(MERCHANT.payeeName)}&am=${amountRs}&cu=${MERCHANT.currency}&tn=${orderId}`;
+    }
+
+    // Google Pay
+    if (method === 'Google Pay') {
+        const params = `pa=${MERCHANT.upiId}&pn=${encodeURIComponent(MERCHANT.payeeName)}&cu=${MERCHANT.currency}&tn=${orderId}`;
+        return `tez://upi/pay?${params}`;
+    }
+
+    // BHIM UPI / generic fallback (no amount so it's editable)
+    const params = `pa=${MERCHANT.upiId}&pn=${encodeURIComponent(MERCHANT.payeeName)}&cu=${MERCHANT.currency}&tn=${orderId}`;
     return `upi://pay?${params}`;
 }
 
+// ─── Component ────────────────────────────────────────────────────────────────
 export default function PaymentPage() {
     const router = useRouter();
-    const { cartTotal, paymentMethod, setPaymentMethod, clearCart, cartCount } = useCart();
-    const [success, setSuccess] = useState(false);
+    const { cartTotal, paymentMethod, setPaymentMethod, cartCount } = useCart();
+    const [selectedOpt, setSelectedOpt] = useState(UPI_OPTIONS[0]);
     const [qrValue, setQrValue] = useState<string | null>(null);
-    const [mobile, setMobile] = useState(true); // assume mobile until confirmed
+    const [mobile, setMobile] = useState(true);
+    const [countdown, setCountdown] = useState(12 * 60 + 30); // 12:30
 
+    // Detect device
+    useEffect(() => { setMobile(isMobile()); }, []);
+
+    // Sync paymentMethod state with our local selection
+    useEffect(() => { setPaymentMethod(selectedOpt.name); }, [selectedOpt]);
+
+    // Countdown timer
     useEffect(() => {
-        setMobile(isMobile());
+        const t = setInterval(() => setCountdown(c => c > 0 ? c - 1 : 0), 1000);
+        return () => clearInterval(t);
     }, []);
 
-    const handlePay = () => {
-        const orderId = "ORDER_" + Date.now();
-        const params = buildUpiParams(orderId);
-        const genericUrl = `upi://pay?${params}`;
+    // Compute final price: base from cart if >0, else MERCHANT.basePriceRs
+    const base = cartTotal > 0 ? cartTotal : MERCHANT.basePriceRs;
+    const finalPrice = calcFinalPrice(base, selectedOpt.discountPct);
+    const savedAmount = base - finalPrice;
 
-        if (!mobile) {
-            // Desktop: show QR code instead of deep link
-            setQrValue(genericUrl);
+    const handleSelect = (opt: typeof UPI_OPTIONS[0]) => {
+        setSelectedOpt(opt);
+        setQrValue(null);
+    };
+
+    const handlePay = () => {
+        const url = buildDeepLink(selectedOpt.name, finalPrice);
+
+        if (selectedOpt.id === 'bhim_upi' || !mobile) {
+            // Show QR code
+            setQrValue(url);
             return;
         }
 
-        // Mobile: try app-specific intent, fall back to generic UPI after 1.5s
-        const specificUrl = appScheme(paymentMethod, params);
+        // Mobile: try specific app, fall back to generic upi:// after 1.5s
+        const genericUrl = `upi://pay?pa=${MERCHANT.upiId}&pn=${encodeURIComponent(MERCHANT.payeeName)}&cu=${MERCHANT.currency}&tn=TXN_${Date.now()}`;
 
-        // Only do fallback if it's NOT already the generic scheme
-        if (specificUrl !== genericUrl) {
+        if (url !== genericUrl) {
             const fallbackTimer = setTimeout(() => {
                 window.location.href = genericUrl;
             }, 1500);
-
-            // If the page hides (app opened), cancel the fallback
-            const handleVisibilityChange = () => {
+            const onHide = () => {
                 if (document.hidden) {
                     clearTimeout(fallbackTimer);
-                    document.removeEventListener('visibilitychange', handleVisibilityChange);
+                    document.removeEventListener('visibilitychange', onHide);
                 }
             };
-            document.addEventListener('visibilitychange', handleVisibilityChange);
+            document.addEventListener('visibilitychange', onHide);
         }
 
-        window.location.href = specificUrl;
+        window.location.href = url;
     };
-
-    if (success) {
-        return (
-            <div className="flex flex-col items-center justify-center h-[60vh] text-center p-6 bg-white mx-4 mt-10 rounded shadow-md border">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                    <span className="text-3xl text-green-500">✓</span>
-                </div>
-                <h2 className="text-xl font-bold text-gray-800 mb-2">Order Placed Successfully!</h2>
-                <p className="text-sm text-gray-500">Thank you for shopping with Flipkart.</p>
-                <div className="text-sm mt-4 p-3 bg-gray-50 border rounded w-full">
-                    Paid via <span className="font-bold">{paymentMethod}</span>
-                </div>
-                <p className="text-xs text-gray-400 mt-6">Redirecting to home...</p>
-            </div>
-        );
-    }
-
-    const upiOptions = [
-        { id: 'phonepe', name: 'PhonePe', icon: phonepeImg },
-        { id: 'paytm', name: 'Paytm', icon: paytmImg },
-        { id: 'gpay', name: 'Google Pay', icon: gpayImg },
-        { id: 'other', name: 'Other UPI', icon: otherUpiImg },
-    ];
 
     return (
         <div className="flex flex-col min-h-screen bg-[#f1f3f6] pb-10">
@@ -115,24 +160,37 @@ export default function PaymentPage() {
                 </div>
             </div>
 
+            {/* Countdown Banner */}
+            <div className="bg-[#fff3e0] px-4 py-2 flex items-center justify-between border-b">
+                <span className="text-[#e65100] text-[12px] font-bold">⚡ Limited-time offer – ends in</span>
+                <div className="flex items-center gap-1 text-[#e65100] font-mono font-bold text-[14px]">
+                    <Timer className="w-4 h-4" />
+                    {formatTime(countdown)}
+                </div>
+            </div>
+
             {/* Price Breakdown */}
-            <div className="bg-[#f5f7fa] px-4 py-4 border-b border-gray-200 relative overflow-hidden">
+            <div className="bg-[#f5f7fa] px-4 py-4 border-b border-gray-200">
                 <div className="flex justify-between items-center text-[15px] text-gray-700 mb-2">
                     <span>Price ({cartCount} items)</span>
-                    <span className="font-medium text-gray-900">₹{cartTotal.toLocaleString()}</span>
+                    <span className="font-medium text-gray-900">₹{base.toLocaleString()}</span>
                 </div>
+                {selectedOpt.discountPct > 0 && (
+                    <div className="flex justify-between items-center text-[14px] text-[#388e3c] mb-2">
+                        <span>{selectedOpt.name} Discount ({selectedOpt.discountPct}%)</span>
+                        <span className="font-medium">−₹{savedAmount.toLocaleString()}</span>
+                    </div>
+                )}
                 <div className="flex justify-between items-center text-[15px] text-gray-700 mb-4">
                     <span>Protect Promise Fee</span>
                     <span className="font-medium text-gray-900">₹0</span>
                 </div>
-
                 <div className="border-t border-dashed border-gray-300 my-3"></div>
-
-                <div className="flex justify-between items-center bg-[#f5f7fa]">
+                <div className="flex justify-between items-center">
                     <div className="flex items-center text-[#2874f0] font-medium text-[16px]">
                         Total Amount <ChevronUp className="w-4 h-4 ml-1" strokeWidth={2.5} />
                     </div>
-                    <span className="font-medium text-[#2874f0] text-[16px]">₹{cartTotal.toLocaleString()}</span>
+                    <span className="font-bold text-[#2874f0] text-[18px]">₹{finalPrice.toLocaleString()}</span>
                 </div>
             </div>
 
@@ -142,7 +200,7 @@ export default function PaymentPage() {
                     <span className="text-[#388e3c] font-bold text-[14px]">5% Cashback</span>
                     <span className="text-[#388e3c] text-[12px]">Claim now with payment offers</span>
                 </div>
-                <div className="flex absolute right-4 top-1/2 -translate-y-1/2 space-x-[-10px] z-0">
+                <div className="flex absolute right-4 top-1/2 -translate-y-1/2 gap-[-8px] z-0">
                     <div className="w-8 h-8 rounded-full bg-red-800 border-2 border-white shadow-sm flex items-center justify-center font-serif text-white text-[10px] italic">A</div>
                     <div className="w-8 h-8 rounded-full bg-blue-700 border-2 border-white shadow-sm flex items-center justify-center font-bold text-white text-[10px]">SBI</div>
                 </div>
@@ -152,41 +210,45 @@ export default function PaymentPage() {
             <div className="bg-white mt-3 border-t border-b">
                 <div className="px-4 py-4 flex justify-between items-start border-b">
                     <div>
-                        <div className="flex items-center">
-                            <span className="font-bold text-[15px] text-black">UPI</span>
-                        </div>
+                        <span className="font-bold text-[15px] text-black">UPI</span>
                         <div className="text-gray-500 text-[13px] mt-0.5">Pay by any UPI app</div>
                     </div>
                     <ChevronDown className="w-5 h-5 text-black" strokeWidth={2.5} />
                 </div>
 
                 <div className="flex flex-col">
-                    {upiOptions.map((opt) => (
+                    {UPI_OPTIONS.map((opt) => (
                         <label
                             key={opt.id}
-                            onClick={() => { setPaymentMethod(opt.name); setQrValue(null); }}
+                            onClick={() => handleSelect(opt)}
                             className="flex items-center justify-between py-3 px-4 cursor-pointer hover:bg-gray-50 transition-colors"
                         >
                             <div className="flex items-center">
-                                <div className="flex items-center justify-center mr-4">
-                                    <img src={opt.icon.src} alt={opt.name} className="w-[32px] h-[32px] object-contain" />
+                                <img src={opt.icon.src} alt={opt.name} className="w-[32px] h-[32px] object-contain mr-4" />
+                                <div className="flex flex-col">
+                                    <span className={`text-[15px] ${selectedOpt.id === opt.id ? 'text-black font-medium' : 'text-gray-800'}`}>{opt.name}</span>
+                                    {opt.discountPct > 0 && (
+                                        <span className="text-[11px] text-[#388e3c] font-medium">{opt.discountPct}% extra discount</span>
+                                    )}
                                 </div>
-                                <span className={`text-[15px] ${paymentMethod === opt.name ? 'text-black font-medium' : 'text-gray-800'}`}>{opt.name}</span>
                             </div>
-                            <div className={`w-[18px] h-[18px] rounded-full border-[1.5px] flex items-center justify-center ${paymentMethod === opt.name ? 'border-[#2874f0]' : 'border-gray-400'}`}>
-                                {paymentMethod === opt.name && <div className="w-2.5 h-2.5 bg-[#2874f0] rounded-full"></div>}
+                            <div className={`w-[18px] h-[18px] rounded-full border-[1.5px] flex items-center justify-center flex-shrink-0 ${selectedOpt.id === opt.id ? 'border-[#2874f0]' : 'border-gray-400'}`}>
+                                {selectedOpt.id === opt.id && <div className="w-2.5 h-2.5 bg-[#2874f0] rounded-full"></div>}
                             </div>
                         </label>
                     ))}
 
-                    {/* Desktop QR Code */}
+                    {/* BHIM / Desktop QR */}
                     {qrValue && (
                         <div className="px-4 pb-4 pt-2 flex flex-col items-center border-t bg-gray-50">
-                            <p className="text-[13px] text-gray-500 mb-3 text-center">Scan with your UPI app to pay.<br />You can edit the amount inside the app.</p>
+                            <p className="text-[13px] text-gray-500 mb-3 text-center">
+                                Scan with <strong>{selectedOpt.name}</strong> to pay ₹{finalPrice.toLocaleString()}<br />
+                                <span className="text-[11px]">Amount is editable inside the app</span>
+                            </p>
                             <div className="bg-white p-3 rounded-lg shadow border">
                                 <QRCodeSVG value={qrValue} size={180} includeMargin />
                             </div>
-                            <p className="text-[11px] text-gray-400 mt-2">UPI ID: paytm.s1x1vd6@pty</p>
+                            <p className="text-[11px] text-gray-400 mt-2">UPI ID: {MERCHANT.upiId}</p>
                             <button onClick={() => setQrValue(null)} className="mt-3 text-[#2874f0] text-[13px] underline">
                                 Close QR
                             </button>
@@ -200,61 +262,65 @@ export default function PaymentPage() {
                                 onClick={handlePay}
                                 className="w-full bg-gradient-to-b from-[#ffcf40] to-[#ffc200] text-black font-bold py-3.5 rounded-sm shadow-[0_1px_2px_rgba(0,0,0,0.2)] text-[16px]"
                             >
-                                PAY ₹{cartTotal.toLocaleString()}
+                                PAY ₹{finalPrice.toLocaleString()}
                             </button>
+                            {savedAmount > 0 && (
+                                <p className="text-center text-[12px] text-[#388e3c] font-medium mt-1.5">
+                                    You save ₹{savedAmount} with {selectedOpt.name}!
+                                </p>
+                            )}
                             {!mobile && (
-                                <p className="text-center text-[11px] text-gray-400 mt-2">A QR code will appear for desktop payment</p>
+                                <p className="text-center text-[11px] text-gray-400 mt-1">A QR code will appear for desktop payment</p>
                             )}
                         </div>
                     )}
                 </div>
             </div>
 
-            {/* Disabled Sections */}
+            {/* Disabled Payment Methods */}
             <div className="bg-[#f1f3f6] mt-3 border-t">
-                {/* Credit Card */}
                 <div className="bg-[#fafafa] px-4 py-4 border-b flex items-start justify-between">
                     <div className="flex flex-col opacity-60">
                         <div className="flex items-center">
                             <CreditCard className="w-6 h-6 text-gray-500 mr-3" strokeWidth={2} />
                             <span className="font-bold text-[15px] text-black">Credit/Debit/ATM Card</span>
                         </div>
-                        <div className="text-gray-500 text-[12px] mt-1 ml-9">Add and secure cards as per RBI<br />guidelines</div>
+                        <div className="text-gray-500 text-[12px] mt-1 ml-9">Add and secure cards as per RBI guidelines</div>
                         <div className="text-[#388e3c] text-[12px] mt-1 ml-9 font-medium">Get upto 5% cashback* • 2 offers available</div>
                     </div>
-                    <div className="flex items-center text-gray-500 text-[13px]">
-                        Unavailable
-                        <HelpCircle className="w-3.5 h-3.5 ml-1" />
-                    </div>
+                    <div className="flex items-center text-gray-500 text-[13px]">Unavailable <HelpCircle className="w-3.5 h-3.5 ml-1" /></div>
                 </div>
-
-                {/* Net Banking */}
                 <div className="bg-[#fafafa] px-4 py-4 border-b flex justify-between items-center opacity-70">
                     <div className="flex items-center">
                         <Landmark className="w-6 h-6 text-gray-500 mr-3" strokeWidth={2} />
                         <span className="font-bold text-[15px] text-black">Net Banking</span>
                     </div>
-                    <div className="flex items-center text-gray-500 text-[13px]">
-                        Unavailable
-                        <HelpCircle className="w-3.5 h-3.5 ml-1" />
-                    </div>
+                    <div className="flex items-center text-gray-500 text-[13px]">Unavailable <HelpCircle className="w-3.5 h-3.5 ml-1" /></div>
                 </div>
-
-                {/* Cash on Delivery */}
                 <div className="bg-[#fafafa] px-4 py-4 border-b flex justify-between items-center opacity-70">
                     <div className="flex items-center">
                         <Banknote className="w-6 h-6 text-gray-500 mr-3" strokeWidth={2} />
                         <span className="font-bold text-[15px] text-black">Cash on Delivery</span>
                     </div>
-                    <div className="flex items-center text-gray-500 text-[13px]">
-                        Unavailable
-                        <HelpCircle className="w-3.5 h-3.5 ml-1" />
-                    </div>
+                    <div className="flex items-center text-gray-500 text-[13px]">Unavailable <HelpCircle className="w-3.5 h-3.5 ml-1" /></div>
                 </div>
             </div>
 
-            {/* Footer */}
-            <div className="pt-8 pb-4 flex flex-col items-center justify-center text-gray-500">
+            {/* Footer price strip */}
+            <div className="fixed bottom-0 left-0 right-0 bg-white border-t px-4 py-2 flex items-center justify-between z-30 shadow-md max-w-md mx-auto">
+                <div className="flex flex-col">
+                    <span className="text-[12px] text-gray-500">Total Payable</span>
+                    <span className="font-bold text-[16px] text-[#212121]">₹{finalPrice.toLocaleString()}</span>
+                </div>
+                <button
+                    onClick={handlePay}
+                    className="bg-[#fb641b] text-white font-bold px-6 py-2.5 rounded text-[14px]"
+                >
+                    Pay Now
+                </button>
+            </div>
+
+            <div className="pt-8 pb-20 flex flex-col items-center justify-center text-gray-500">
                 <p className="text-[13px] font-bold mb-3">35 Crore happy customers and counting!</p>
                 <div className="w-8 h-8 rounded-full border-2 border-gray-300 flex items-center justify-center text-gray-300">
                     <Smile className="w-5 h-5" strokeWidth={2.5} />
