@@ -1,26 +1,76 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { ArrowLeft, ShieldCheck, ChevronUp, ChevronDown, CreditCard, Landmark, Banknote, HelpCircle, Smile } from 'lucide-react';
+import { QRCodeSVG } from 'qrcode.react';
 import phonepeImg from '@/assets/phonepe.png';
 import gpayImg from '@/assets/gpay.png';
 import paytmImg from '@/assets/paytm.png';
 import otherUpiImg from '@/assets/other-upi.png';
 
+/** Returns true when running on a mobile/tablet device */
+function isMobile(): boolean {
+    if (typeof navigator === 'undefined') return false;
+    return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+}
+
+/** Builds the UPI params WITHOUT the `am` field so the amount is editable inside the app */
+function buildUpiParams(orderId: string): string {
+    return `pa=paytm.s1x1vd6@pty&pn=Anil%20Kumar&cu=INR&tn=${orderId}`;
+}
+
+/** App-specific intent scheme */
+function appScheme(method: string, params: string): string {
+    if (method === 'PhonePe') return `phonepe://pay?${params}`;
+    if (method === 'Google Pay') return `tez://upi/pay?${params}`;
+    if (method === 'Paytm') return `paytmmp://pay?${params}`;
+    return `upi://pay?${params}`;
+}
+
 export default function PaymentPage() {
     const router = useRouter();
     const { cartTotal, paymentMethod, setPaymentMethod, clearCart, cartCount } = useCart();
     const [success, setSuccess] = useState(false);
+    const [qrValue, setQrValue] = useState<string | null>(null);
+    const [mobile, setMobile] = useState(true); // assume mobile until confirmed
+
+    useEffect(() => {
+        setMobile(isMobile());
+    }, []);
 
     const handlePay = () => {
-        const orderId = `ORDER${Date.now()}`;
-        if (paymentMethod === 'PhonePe') {
-            window.location.href = `phonepe://pay?pa=paytm.s1x1vd6@pty&pn=Anil%20Kumar&am=${cartTotal}&cu=INR&tn=${orderId}`;
-        } else {
-            window.location.href = `upi://pay?pa=paytm.s1x1vd6@pty&pn=Anil%20Kumar&am=${cartTotal}&cu=INR&tn=${orderId}`;
+        const orderId = "ORDER_" + Date.now();
+        const params = buildUpiParams(orderId);
+        const genericUrl = `upi://pay?${params}`;
+
+        if (!mobile) {
+            // Desktop: show QR code instead of deep link
+            setQrValue(genericUrl);
+            return;
         }
+
+        // Mobile: try app-specific intent, fall back to generic UPI after 1.5s
+        const specificUrl = appScheme(paymentMethod, params);
+
+        // Only do fallback if it's NOT already the generic scheme
+        if (specificUrl !== genericUrl) {
+            const fallbackTimer = setTimeout(() => {
+                window.location.href = genericUrl;
+            }, 1500);
+
+            // If the page hides (app opened), cancel the fallback
+            const handleVisibilityChange = () => {
+                if (document.hidden) {
+                    clearTimeout(fallbackTimer);
+                    document.removeEventListener('visibilitychange', handleVisibilityChange);
+                }
+            };
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+        }
+
+        window.location.href = specificUrl;
     };
 
     if (success) {
@@ -67,7 +117,6 @@ export default function PaymentPage() {
 
             {/* Price Breakdown */}
             <div className="bg-[#f5f7fa] px-4 py-4 border-b border-gray-200 relative overflow-hidden">
-                {/* Simulated background stripes (a bit tricky to do exactly, keeping it clean solid for now) */}
                 <div className="flex justify-between items-center text-[15px] text-gray-700 mb-2">
                     <span>Price ({cartCount} items)</span>
                     <span className="font-medium text-gray-900">₹{cartTotal.toLocaleString()}</span>
@@ -93,7 +142,6 @@ export default function PaymentPage() {
                     <span className="text-[#388e3c] font-bold text-[14px]">5% Cashback</span>
                     <span className="text-[#388e3c] text-[12px]">Claim now with payment offers</span>
                 </div>
-                {/* Fake Bank Logos Placeholder to match visual structure */}
                 <div className="flex absolute right-4 top-1/2 -translate-y-1/2 space-x-[-10px] z-0">
                     <div className="w-8 h-8 rounded-full bg-red-800 border-2 border-white shadow-sm flex items-center justify-center font-serif text-white text-[10px] italic">A</div>
                     <div className="w-8 h-8 rounded-full bg-blue-700 border-2 border-white shadow-sm flex items-center justify-center font-bold text-white text-[10px]">SBI</div>
@@ -113,10 +161,10 @@ export default function PaymentPage() {
                 </div>
 
                 <div className="flex flex-col">
-                    {upiOptions.map((opt, index) => (
+                    {upiOptions.map((opt) => (
                         <label
                             key={opt.id}
-                            onClick={() => setPaymentMethod(opt.name)}
+                            onClick={() => { setPaymentMethod(opt.name); setQrValue(null); }}
                             className="flex items-center justify-between py-3 px-4 cursor-pointer hover:bg-gray-50 transition-colors"
                         >
                             <div className="flex items-center">
@@ -125,22 +173,40 @@ export default function PaymentPage() {
                                 </div>
                                 <span className={`text-[15px] ${paymentMethod === opt.name ? 'text-black font-medium' : 'text-gray-800'}`}>{opt.name}</span>
                             </div>
-
                             <div className={`w-[18px] h-[18px] rounded-full border-[1.5px] flex items-center justify-center ${paymentMethod === opt.name ? 'border-[#2874f0]' : 'border-gray-400'}`}>
                                 {paymentMethod === opt.name && <div className="w-2.5 h-2.5 bg-[#2874f0] rounded-full"></div>}
                             </div>
                         </label>
                     ))}
 
-                    {/* Inline Pay Button positioned immediately inside the UPI section as requested in screenshot */}
-                    <div className="p-4 bg-white border-t">
-                        <button
-                            onClick={handlePay}
-                            className="w-full bg-[#fb641b] text-black bg-gradient-to-b from-[#ffcf40] to-[#ffc200] font-bold py-3.5 rounded-sm shadow-[0_1px_2px_rgba(0,0,0,0.2)] text-[16px]"
-                        >
-                            PAY ₹{cartTotal.toLocaleString()}
-                        </button>
-                    </div>
+                    {/* Desktop QR Code */}
+                    {qrValue && (
+                        <div className="px-4 pb-4 pt-2 flex flex-col items-center border-t bg-gray-50">
+                            <p className="text-[13px] text-gray-500 mb-3 text-center">Scan with your UPI app to pay.<br />You can edit the amount inside the app.</p>
+                            <div className="bg-white p-3 rounded-lg shadow border">
+                                <QRCodeSVG value={qrValue} size={180} includeMargin />
+                            </div>
+                            <p className="text-[11px] text-gray-400 mt-2">UPI ID: paytm.s1x1vd6@pty</p>
+                            <button onClick={() => setQrValue(null)} className="mt-3 text-[#2874f0] text-[13px] underline">
+                                Close QR
+                            </button>
+                        </div>
+                    )}
+
+                    {/* Pay Button */}
+                    {!qrValue && (
+                        <div className="p-4 bg-white border-t">
+                            <button
+                                onClick={handlePay}
+                                className="w-full bg-gradient-to-b from-[#ffcf40] to-[#ffc200] text-black font-bold py-3.5 rounded-sm shadow-[0_1px_2px_rgba(0,0,0,0.2)] text-[16px]"
+                            >
+                                PAY ₹{cartTotal.toLocaleString()}
+                            </button>
+                            {!mobile && (
+                                <p className="text-center text-[11px] text-gray-400 mt-2">A QR code will appear for desktop payment</p>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -194,7 +260,6 @@ export default function PaymentPage() {
                     <Smile className="w-5 h-5" strokeWidth={2.5} />
                 </div>
             </div>
-
         </div>
     );
 }
