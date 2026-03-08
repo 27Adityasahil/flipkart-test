@@ -4,6 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { ArrowLeft, Trash2, ShieldCheck, Bookmark, Zap, Truck, ChevronDown, Star } from 'lucide-react';
+import Link from 'next/link';
 import wowImg from '@/assets/wow.png';
 import fAssuredImg from '@/assets/flipkart-assured.png';
 
@@ -54,7 +55,9 @@ export default function CartPage() {
                         <div className="p-4">
                             <div className="flex gap-4">
                                 <div className="w-24 flex-shrink-0 flex flex-col items-center">
-                                    <img src={item.image} alt={item.title} className="w-full h-auto object-contain mb-3" />
+                                    <Link href={`/product/${item.id}`}>
+                                        <img src={item.image} alt={item.title} className="w-full h-auto object-contain mb-3 cursor-pointer" />
+                                    </Link>
                                     <div className="relative inline-block w-full">
                                         <select
                                             value={item.quantity}

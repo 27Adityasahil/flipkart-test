@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import slide1 from '@/assets/carousel-hero/1.png';
 import slide2 from '@/assets/carousel-hero/2.png';
+// import slide3 from '@/assets/kitchen/1/1.png';
 
 export default function Carousel() {
     const slides = [slide1, slide2];
