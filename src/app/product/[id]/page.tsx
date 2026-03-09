@@ -86,7 +86,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                     </div>
 
                     <div className="flex items-center gap-1.5 mt-2 bg-red-50 text-[#d32f2f] border border-red-100 px-2 py-1 rounded w-fit font-bold text-[11px] tracking-wide">
-                        <Clock className="w-3.5 h-3.5" strokeWidth={3} /> <LiveTimer type="offer" initialMinutes={12} initialSeconds={30} />
+                        <Clock className="w-3.5 h-3.5" strokeWidth={3} /> <LiveTimer type="offer" initialMinutes={11} initialSeconds={22} />
                     </div>
                 </div>
 

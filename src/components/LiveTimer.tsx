@@ -8,7 +8,7 @@ interface Props {
     type?: 'offer' | 'sale';
 }
 
-export default function LiveTimer({ initialMinutes = 12, initialSeconds = 30, type = 'offer' }: Props) {
+export default function LiveTimer({ initialMinutes = 11, initialSeconds = 22, type = 'offer' }: Props) {
     const [timeLeft, setTimeLeft] = useState<number | null>(null);
 
     useEffect(() => {

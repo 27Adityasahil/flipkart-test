@@ -35,7 +35,7 @@ export default function HomePage() {
               <div className="flex items-center text-[#2874f0] space-x-1.5 mt-0.5">
                 <Clock className="w-4 h-4" />
                 <span className="text-lg font-medium tracking-wider">
-                  <LiveTimer type="sale" initialMinutes={5} initialSeconds={18} />
+                  <LiveTimer type="sale" initialMinutes={11} initialSeconds={22} />
                 </span>
               </div>
             </div>
