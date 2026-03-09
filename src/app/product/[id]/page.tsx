@@ -98,14 +98,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                         </div>
                         <span className="text-[11px] text-[#212121] font-medium leading-tight text-[#2874f0]">7 days<br />Replacement</span>
                     </div>
-                    <div className="w-[1px] bg-gray-200 h-10 self-center"></div>
-                    <div className="flex flex-col items-center flex-1">
-                        <div className="w-10 h-10 border border-gray-200 rounded-full flex items-center justify-center mb-1 bg-white shadow-sm relative overflow-hidden">
-                            <Banknote className="w-5 h-5 text-gray-500 absolute" />
-                            <div className="absolute inset-0 border-t-2 border-gray-500 transform -rotate-[45deg] scale-150 top-1/2"></div>
-                        </div>
-                        <span className="text-[11px] text-[#212121] font-medium leading-tight">No Cash<br />On Delivery</span>
-                    </div>
+
                     <div className="w-[1px] bg-gray-200 h-10 self-center"></div>
                     <div className="flex flex-col items-center flex-1">
                         <div className="w-10 h-10 border border-gray-200 rounded-full flex items-center justify-center mb-1 bg-white shadow-sm">
