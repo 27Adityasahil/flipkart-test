@@ -1,184 +1,5 @@
 [
   {
-    "id": "1",
-    "slug": "samsung-galaxy-s24",
-    "image": "/assets/electric/galaxys24-1.png",
-    "images": [
-      "/assets/electric/galaxys24-1.png",
-      "/assets/electric/galaxys24-2.png",
-      "/assets/electric/galaxys24-3.png",
-      "/assets/electric/galaxys24-4.png",
-      "/assets/electric/galaxys24-5.png",
-      "/assets/electric/galaxys24-6.png"
-    ],
-    "title": "Samsung Galaxy S24 5G AI Smartphone (Onyx Black, 8GB RAM, 256GB Storage) | Galaxy AI | 50MP ProVisual Camera | Corning Gorilla Glass Victus 2",
-    "rating": 4.6,
-    "reviewCount": 128450,
-    "currentPrice": 499,
-    "originalPrice": 74999,
-    "discount": 99,
-    "badge": "Trending",
-    "deliveryText": "Delivery Tomorrow",
-    "highlights": [
-      "No Cash On Delivery",
-      "7 days Replacement",
-      "Plus (F-Assured)"
-    ],
-    "offers": [
-      "Offer ends in 12min 30sec"
-    ],
-    "reviews": {
-      "breakdown": [
-        {
-          "s": 5,
-          "v": 78420,
-          "c": "bg-[#388e3c]",
-          "w": "w-[80%]"
-        },
-        {
-          "s": 4,
-          "v": 32190,
-          "c": "bg-[#388e3c]",
-          "w": "w-[60%]"
-        },
-        {
-          "s": 3,
-          "v": 9840,
-          "c": "bg-[#ff9f00]",
-          "w": "w-[15%]"
-        },
-        {
-          "s": 2,
-          "v": 4320,
-          "c": "bg-[#ff9f00]",
-          "w": "w-[10%]"
-        },
-        {
-          "s": 1,
-          "v": 3680,
-          "c": "bg-[#ff6161]",
-          "w": "w-[8%]"
-        }
-      ],
-      "list": [
-        {
-          "rating": 5,
-          "title": "Absolutely stunning device!",
-          "text": "The Galaxy AI features are game-changing. Camera quality is exceptional, especially in low light.",
-          "author": "Arjun Mehta",
-          "location": "Mumbai",
-          "time": "1 day ago"
-        },
-        {
-          "rating": 4,
-          "title": "Great performance, premium feel",
-          "text": "Snapdragon chipset makes everything buttery smooth. Battery life could be better but overall fantastic.",
-          "author": "Priya Singh",
-          "location": "Delhi",
-          "time": "2 days ago"
-        },
-        {
-          "rating": 5,
-          "title": "Best Samsung phone ever",
-          "text": "The ProVisual camera system blows my mind. The AI photo editing is incredibly useful.",
-          "author": "Rahul Sharma",
-          "location": "Bangalore",
-          "time": "1 day ago"
-        },
-        {
-          "rating": 5,
-          "title": "Worth every rupee",
-          "text": "The build quality is premium. Glass back looks gorgeous and Gorilla Glass Victus 2 is reassuring.",
-          "author": "Sneha Kapoor",
-          "location": "Pune",
-          "time": "2 days ago"
-        },
-        {
-          "rating": 4,
-          "title": "Smooth and powerful",
-          "text": "8GB RAM handles everything effortlessly. Multitasking is seamless and apps open instantly.",
-          "author": "Vikram Patel",
-          "location": "Hyderabad",
-          "time": "1 day ago"
-        }
-      ]
-    },
-    "similarProducts": [
-      {
-        "id": "32",
-        "title": "Pigeon by Stovekraft Hard Anodised Aluminium Pressure Cooker Combo - 2 L, 3 L and 5 L Induction Base Outer Lid Cooker (14414, Black)",
-        "image": "/assets/kitchen/cooker1.png",
-        "price": 395,
-        "emi": 33,
-        "rating": 90,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "33",
-        "title": "Elica Vetro Glass Top 4 Burner Auto Ignition Gas Stove (694 CT VETRO SS AI), Black",
-        "image": "/assets/kitchen/stove1.png",
-        "price": 395,
-        "emi": 33,
-        "rating": 96,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "34",
-        "title": "Havells Instanio 3L Instant Water Heater(Geyser)| Temp. Sensing LED Indicator| Rust & Shock Proof Body| ISI Marked|Warranty: 5 year on Inner Tank| High Rise Compatible (White Blue)",
-        "image": "/assets/kitchen/havells1.png",
-        "price": 495,
-        "emi": 41,
-        "rating": 96,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "31",
-        "title": "Blue Star 45 L Direct Cool Single Door 2 Star Convertible Refrigerator (Graphite - Grey, MR60-GG)",
-        "image": "/assets/electric/bluestar1.png",
-        "price": 399,
-        "emi": 33,
-        "rating": 84,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "30",
-        "title": "Godrej 194 L Direct Cool Single Door 5 Star Refrigerator (Midnight Black, RD E-IMPRESS 215E TDIE MD BM)",
-        "image": "/assets/electric/godrej1.png",
-        "price": 999,
-        "emi": 83,
-        "rating": 88,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "29",
-        "title": "HAVAI RED 18\" Mist Pedestal Fan | High-Speed, Remote & Touch Control, 3.2L Tank, 80W Power, 350 Sq Ft Coverage, Easy Install, Black, 18 Inches",
-        "image": "/assets/electric/havai1.png",
-        "price": 499,
-        "emi": 42,
-        "rating": 68,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "27",
-        "title": "JKR Enterprise 260 W White Electric Whisk, Hand Blender (JKR-2019)",
-        "image": "/assets/electric/jkr1.png",
-        "price": 199,
-        "emi": 17,
-        "rating": 82,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "28",
-        "title": "Green Soul Kiev Orthopedic Office Chair | Ergonomic Design with Rocking Function Fabric Office Executive Chair (Grey, DIY)",
-        "image": "/assets/electric/kiev1.png",
-        "price": 499,
-        "emi": 42,
-        "rating": 82,
-        "delivery": "Delivery Tomorrow"
-      }
-    ]
-  },
-  {
     "id": "2",
     "slug": "atomberg-renesa-ceiling-fan",
     "image": "/assets/electric/atomberg.png",
@@ -407,7 +228,7 @@
     "title": "Lenovo LOQ Essential Intel Core i5 12th Gen 12450HX (12 GB/512GB SSD/Windows 11 Home/4 GB Graphics/NVIDIA GeForce RTX 2050) 83LK0031IN Gaming Laptop (15.6 Inch, Luna Grey, 1.77 Kg)",
     "rating": 4.3,
     "reviewCount": 76890,
-    "currentPrice": 399,
+    "currentPrice": 999,
     "originalPrice": 57990,
     "discount": 99,
     "badge": "Trending",
@@ -801,210 +622,6 @@
     ]
   },
   {
-    "id": "5",
-    "slug": "oneplus-13-5g",
-    "image": "/assets/electric/oneplus1.png",
-    "images": [
-      "/assets/electric/oneplus1.png",
-      "/assets/electric/oneplus2.png",
-      "/assets/electric/oneplus3.png",
-      "/assets/electric/oneplus4.png",
-      "/assets/electric/oneplus5.png",
-      "/assets/electric/oneplus6.png"
-    ],
-    "title": "OnePlus 15R 5G (Charcoal Black, 256 GB) (12 GB RAM)",
-    "rating": 4.5,
-    "reviewCount": 52430,
-    "currentPrice": 397,
-    "originalPrice": 47838,
-    "discount": 99,
-    "badge": "Trending",
-    "deliveryText": "Delivery Tomorrow",
-    "highlights": [
-      "No Cash On Delivery",
-      "7 days Replacement",
-      "Plus (F-Assured)"
-    ],
-    "offers": [
-      "Offer ends in 12min 30sec"
-    ],
-    "reviews": {
-      "breakdown": [
-        {
-          "s": 5,
-          "v": 32940,
-          "c": "bg-[#388e3c]",
-          "w": "w-[80%]"
-        },
-        {
-          "s": 4,
-          "v": 13810,
-          "c": "bg-[#388e3c]",
-          "w": "w-[58%]"
-        },
-        {
-          "s": 3,
-          "v": 3680,
-          "c": "bg-[#ff9f00]",
-          "w": "w-[12%]"
-        },
-        {
-          "s": 2,
-          "v": 1290,
-          "c": "bg-[#ff9f00]",
-          "w": "w-[7%]"
-        },
-        {
-          "s": 1,
-          "v": 710,
-          "c": "bg-[#ff6161]",
-          "w": "w-[4%]"
-        }
-      ],
-      "list": [
-        {
-          "rating": 5,
-          "title": "Flagship killer is back!",
-          "text": "Snapdragon 8 Elite is an absolute powerhouse. Gaming, photography, multitasking — handles everything like a beast.",
-          "author": "Abhishek Rao",
-          "location": "Bangalore",
-          "time": "1 day ago"
-        },
-        {
-          "rating": 5,
-          "title": "Hasselblad camera is incredible",
-          "text": "Portrait shots look like professional photography. The color calibration from Hasselblad really shows.",
-          "author": "Nisha Pillai",
-          "location": "Kochi",
-          "time": "2 days ago"
-        },
-        {
-          "rating": 4,
-          "title": "Great battery and charging",
-          "text": "6000mAh battery easily lasts 2 days with moderate use. 100W SuperVOOC charges from 0 to 100 in under an hour.",
-          "author": "Yash Gupta",
-          "location": "Jaipur",
-          "time": "1 day ago"
-        },
-        {
-          "rating": 5,
-          "title": "16GB RAM is future-proof",
-          "text": "No app ever reloads in the background. The Black Eclipse color option looks extremely premium.",
-          "author": "Tanvi Shah",
-          "location": "Ahmedabad",
-          "time": "2 days ago"
-        },
-        {
-          "rating": 5,
-          "title": "Best phone under 70K",
-          "text": "OxygenOS is clean and fast. Alert Slider is still my favorite physical feature on any phone.",
-          "author": "Ravi Shankar",
-          "location": "Hyderabad",
-          "time": "1 day ago"
-        }
-      ]
-    },
-    "similarProducts": [
-      {
-        "id": "32",
-        "title": "Pigeon by Stovekraft Hard Anodised Aluminium Pressure Cooker Combo - 2 L, 3 L and 5 L Induction Base Outer Lid Cooker (14414, Black)",
-        "image": "/assets/kitchen/cooker1.png",
-        "price": 395,
-        "emi": 33,
-        "rating": 90,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "33",
-        "title": "Elica Vetro Glass Top 4 Burner Auto Ignition Gas Stove (694 CT VETRO SS AI), Black",
-        "image": "/assets/kitchen/stove1.png",
-        "price": 395,
-        "emi": 33,
-        "rating": 96,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "34",
-        "title": "Havells Instanio 3L Instant Water Heater(Geyser)| Temp. Sensing LED Indicator| Rust & Shock Proof Body| ISI Marked|Warranty: 5 year on Inner Tank| High Rise Compatible (White Blue)",
-        "image": "/assets/kitchen/havells1.png",
-        "price": 495,
-        "emi": 41,
-        "rating": 96,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "31",
-        "title": "Blue Star 45 L Direct Cool Single Door 2 Star Convertible Refrigerator (Graphite - Grey, MR60-GG)",
-        "image": "/assets/electric/bluestar1.png",
-        "price": 399,
-        "emi": 33,
-        "rating": 84,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "30",
-        "title": "Godrej 194 L Direct Cool Single Door 5 Star Refrigerator (Midnight Black, RD E-IMPRESS 215E TDIE MD BM)",
-        "image": "/assets/electric/godrej1.png",
-        "price": 999,
-        "emi": 83,
-        "rating": 88,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "29",
-        "title": "HAVAI RED 18\" Mist Pedestal Fan | High-Speed, Remote & Touch Control, 3.2L Tank, 80W Power, 350 Sq Ft Coverage, Easy Install, Black, 18 Inches",
-        "image": "/assets/electric/havai1.png",
-        "price": 499,
-        "emi": 42,
-        "rating": 68,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "27",
-        "title": "JKR Enterprise 260 W White Electric Whisk, Hand Blender (JKR-2019)",
-        "image": "/assets/electric/jkr1.png",
-        "price": 199,
-        "emi": 17,
-        "rating": 82,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "28",
-        "title": "Green Soul Kiev Orthopedic Office Chair | Ergonomic Design with Rocking Function Fabric Office Executive Chair (Grey, DIY)",
-        "image": "/assets/electric/kiev1.png",
-        "price": 499,
-        "emi": 42,
-        "rating": 82,
-        "delivery": "Delivery Tomorrow"
-      }
-    ],
-    "stockLeft": 10,
-    "soldCount": "5917+",
-    "warranty": "1 Year Manufacturer Warranty",
-    "details": [
-      "Premium OnePlus 5G Smartphone with Signature Never Settle Design",
-      "Powerful Processor for Smooth Multitasking & High-Performance Gaming",
-      "Large Full HD+ Display for Immersive Viewing Experience",
-      "High Refresh Rate Screen for Ultra-Smooth Scrolling & Gameplay",
-      "Dual Camera Setup for Clear Photos & Everyday Photography",
-      "Advanced Image Processing for Bright & Detailed Shots",
-      "AI Camera Features for Portrait, Night & HDR Photography",
-      "High-Quality Front Camera for Selfies & Video Calls",
-      "Long-Lasting Battery for All-Day Usage",
-      "Fast Charging Support for Quick Power Top-Ups",
-      "OxygenOS Experience for Clean, Fast & Smooth Performance",
-      "5G Connectivity for Ultra-Fast Downloads & Streaming",
-      "Large Storage Capacity for Apps, Media & Files",
-      "Slim & Lightweight Body for Comfortable Handling",
-      "Strong Build Quality with Premium Finish",
-      "Side-Mounted/On-Screen Fingerprint Sensor for Secure Unlock",
-      "Dual SIM Support for Work & Personal Use",
-      "Optimized Gaming Mode for Lag-Free Performance",
-      "Enhanced Audio Experience for Music & Videos",
-      "Perfect Balance of Performance, Style & Reliability"
-    ]
-  },
-  {
     "id": "6",
     "slug": "jbl-partybox-310",
     "image": "/assets/electric/partybox1.png",
@@ -1222,7 +839,7 @@
     "title": "Samsung Galaxy Tab S10+ With S Pen 12 GB RAM 256 GB ROM 12.4 inch with Wi-Fi+5G Gaming MediaTek Dimensity 9300 Tablet (Moonstone Gray)",
     "rating": 4.2,
     "reviewCount": 31450,
-    "currentPrice": 479,
+    "currentPrice": 757,
     "originalPrice": 77490,
     "discount": 99,
     "badge": "",
@@ -1749,620 +1366,6 @@
           "author": "Pooja",
           "location": "Jaipur",
           "time": "Today"
-        }
-      ]
-    },
-    "similarProducts": [
-      {
-        "id": "32",
-        "title": "Pigeon by Stovekraft Hard Anodised Aluminium Pressure Cooker Combo - 2 L, 3 L and 5 L Induction Base Outer Lid Cooker (14414, Black)",
-        "image": "/assets/kitchen/cooker1.png",
-        "price": 395,
-        "emi": 33,
-        "rating": 90,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "33",
-        "title": "Elica Vetro Glass Top 4 Burner Auto Ignition Gas Stove (694 CT VETRO SS AI), Black",
-        "image": "/assets/kitchen/stove1.png",
-        "price": 395,
-        "emi": 33,
-        "rating": 96,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "34",
-        "title": "Havells Instanio 3L Instant Water Heater(Geyser)| Temp. Sensing LED Indicator| Rust & Shock Proof Body| ISI Marked|Warranty: 5 year on Inner Tank| High Rise Compatible (White Blue)",
-        "image": "/assets/kitchen/havells1.png",
-        "price": 495,
-        "emi": 41,
-        "rating": 96,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "31",
-        "title": "Blue Star 45 L Direct Cool Single Door 2 Star Convertible Refrigerator (Graphite - Grey, MR60-GG)",
-        "image": "/assets/electric/bluestar1.png",
-        "price": 399,
-        "emi": 33,
-        "rating": 84,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "30",
-        "title": "Godrej 194 L Direct Cool Single Door 5 Star Refrigerator (Midnight Black, RD E-IMPRESS 215E TDIE MD BM)",
-        "image": "/assets/electric/godrej1.png",
-        "price": 999,
-        "emi": 83,
-        "rating": 88,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "29",
-        "title": "HAVAI RED 18\" Mist Pedestal Fan | High-Speed, Remote & Touch Control, 3.2L Tank, 80W Power, 350 Sq Ft Coverage, Easy Install, Black, 18 Inches",
-        "image": "/assets/electric/havai1.png",
-        "price": 499,
-        "emi": 42,
-        "rating": 68,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "27",
-        "title": "JKR Enterprise 260 W White Electric Whisk, Hand Blender (JKR-2019)",
-        "image": "/assets/electric/jkr1.png",
-        "price": 199,
-        "emi": 17,
-        "rating": 82,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "28",
-        "title": "Green Soul Kiev Orthopedic Office Chair | Ergonomic Design with Rocking Function Fabric Office Executive Chair (Grey, DIY)",
-        "image": "/assets/electric/kiev1.png",
-        "price": 499,
-        "emi": 42,
-        "rating": 82,
-        "delivery": "Delivery Tomorrow"
-      }
-    ]
-  },
-  {
-    "id": "10",
-    "slug": "apple-iphone-15-pro-max",
-    "image": "/assets/electric/iphone1.png",
-    "images": [
-      "/assets/electric/iphone1.png",
-      "/assets/electric/iphone2.png",
-      "/assets/electric/iphone3.png",
-      "/assets/electric/iphone4.png",
-      "/assets/electric/iphone5.png",
-      "/assets/electric/iphone6.png"
-    ],
-    "title": "APPLE iPhone 15 Pro Max (White Titanium, 512 GB)",
-    "rating": 4.8,
-    "reviewCount": 186420,
-    "currentPrice": 499,
-    "originalPrice": 97999,
-    "discount": 99,
-    "badge": "Trending",
-    "deliveryText": "Delivery Tomorrow",
-    "stockLeft": 9,
-    "soldCount": "7771+",
-    "warranty": "1 Year Manufacturer Warranty",
-    "highlights": [
-      "No Cash On Delivery",
-      "7 days Replacement",
-      "Plus (F-Assured)"
-    ],
-    "offers": [
-      "Offer ends in 10min 33sec"
-    ],
-    "details": [
-      "Premium titanium design with ultra-slim bezels",
-      "Massive 6.9-inch Super Retina XDR display",
-      "ProMotion technology with adaptive 120Hz refresh rate",
-      "Powered by latest A-series chip for ultra-fast performance",
-      "Advanced triple rear camera system for pro-level photography",
-      "High-resolution primary sensor for stunning detail",
-      "Ultra-wide lens for expansive landscape shots",
-      "Telephoto lens with enhanced optical zoom capability",
-      "Next-generation Night Mode for low-light clarity",
-      "4K cinematic video recording support",
-      "Enhanced AI image processing for natural colors",
-      "Dynamic Island for smart notifications & multitasking",
-      "Face ID with improved security & speed",
-      "All-day battery life with fast charging support",
-      "Wireless charging & MagSafe compatibility",
-      "iOS experience with long-term software updates",
-      "Premium stereo speakers with spatial audio",
-      "5G connectivity for ultra-fast internet speeds",
-      "IP68 water & dust resistance rating",
-      "Ideal for gaming, photography, content creation & business use"
-    ],
-    "reviews": {
-      "breakdown": [
-        {
-          "s": 5,
-          "v": 124540,
-          "c": "bg-[#388e3c]",
-          "w": "w-[85%]"
-        },
-        {
-          "s": 4,
-          "v": 42180,
-          "c": "bg-[#388e3c]",
-          "w": "w-[60%]"
-        },
-        {
-          "s": 3,
-          "v": 11290,
-          "c": "bg-[#ff9f00]",
-          "w": "w-[12%]"
-        },
-        {
-          "s": 2,
-          "v": 4960,
-          "c": "bg-[#ff9f00]",
-          "w": "w-[8%]"
-        },
-        {
-          "s": 1,
-          "v": 3450,
-          "c": "bg-[#ff6161]",
-          "w": "w-[5%]"
-        }
-      ],
-      "list": [
-        {
-          "rating": 5,
-          "title": "Absolutely mind-blowing!",
-          "text": "The titanium build feels premium in hand. Camera system is unmatched — every photo looks like a professional shot.",
-          "author": "Aryan Kapoor",
-          "location": "Mumbai",
-          "time": "1 day ago"
-        },
-        {
-          "rating": 5,
-          "title": "Best iPhone ever made",
-          "text": "Dynamic Island is super useful. Performance is blazing fast and battery lasts all day easily.",
-          "author": "Priya Nair",
-          "location": "Bangalore",
-          "time": "2 days ago"
-        },
-        {
-          "rating": 4,
-          "title": "Great but expensive",
-          "text": "Photography and videography are unreal. Best phone camera I have ever used. Build is ultra premium.",
-          "author": "Rahul Desai",
-          "location": "Pune",
-          "time": "1 day ago"
-        },
-        {
-          "rating": 5,
-          "title": "Worth every paisa",
-          "text": "5G speeds are insane. Face ID works flawlessly even in the dark. Best investment I made.",
-          "author": "Sneha Verma",
-          "location": "Delhi",
-          "time": "2 days ago"
-        },
-        {
-          "rating": 5,
-          "title": "Pro-level photography",
-          "text": "Telephoto zoom is incredible. Night mode captures details even in pitch darkness.",
-          "author": "Vikram Soni",
-          "location": "Chennai",
-          "time": "1 day ago"
-        }
-      ]
-    },
-    "similarProducts": [
-      {
-        "id": "32",
-        "title": "Pigeon by Stovekraft Hard Anodised Aluminium Pressure Cooker Combo - 2 L, 3 L and 5 L Induction Base Outer Lid Cooker (14414, Black)",
-        "image": "/assets/kitchen/cooker1.png",
-        "price": 395,
-        "emi": 33,
-        "rating": 90,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "33",
-        "title": "Elica Vetro Glass Top 4 Burner Auto Ignition Gas Stove (694 CT VETRO SS AI), Black",
-        "image": "/assets/kitchen/stove1.png",
-        "price": 395,
-        "emi": 33,
-        "rating": 96,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "34",
-        "title": "Havells Instanio 3L Instant Water Heater(Geyser)| Temp. Sensing LED Indicator| Rust & Shock Proof Body| ISI Marked|Warranty: 5 year on Inner Tank| High Rise Compatible (White Blue)",
-        "image": "/assets/kitchen/havells1.png",
-        "price": 495,
-        "emi": 41,
-        "rating": 96,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "31",
-        "title": "Blue Star 45 L Direct Cool Single Door 2 Star Convertible Refrigerator (Graphite - Grey, MR60-GG)",
-        "image": "/assets/electric/bluestar1.png",
-        "price": 399,
-        "emi": 33,
-        "rating": 84,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "30",
-        "title": "Godrej 194 L Direct Cool Single Door 5 Star Refrigerator (Midnight Black, RD E-IMPRESS 215E TDIE MD BM)",
-        "image": "/assets/electric/godrej1.png",
-        "price": 999,
-        "emi": 83,
-        "rating": 88,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "29",
-        "title": "HAVAI RED 18\" Mist Pedestal Fan | High-Speed, Remote & Touch Control, 3.2L Tank, 80W Power, 350 Sq Ft Coverage, Easy Install, Black, 18 Inches",
-        "image": "/assets/electric/havai1.png",
-        "price": 499,
-        "emi": 42,
-        "rating": 68,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "27",
-        "title": "JKR Enterprise 260 W White Electric Whisk, Hand Blender (JKR-2019)",
-        "image": "/assets/electric/jkr1.png",
-        "price": 199,
-        "emi": 17,
-        "rating": 82,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "28",
-        "title": "Green Soul Kiev Orthopedic Office Chair | Ergonomic Design with Rocking Function Fabric Office Executive Chair (Grey, DIY)",
-        "image": "/assets/electric/kiev1.png",
-        "price": 499,
-        "emi": 42,
-        "rating": 82,
-        "delivery": "Delivery Tomorrow"
-      }
-    ]
-  },
-  {
-    "id": "11",
-    "slug": "samsung-galaxy-s24-ultra",
-    "image": "/assets/electric/galaxys24-1.png",
-    "images": [
-      "/assets/electric/galaxys24-1.png",
-      "/assets/electric/galaxys24-2.png",
-      "/assets/electric/galaxys24-3.png",
-      "/assets/electric/galaxys24-4.png",
-      "/assets/electric/galaxys24-5.png",
-      "/assets/electric/galaxys24-6.png"
-    ],
-    "title": "Samsung Galaxy S24 Ultra 5G (Titanium Gray, 256 GB) (12 GB RAM)",
-    "rating": 4.7,
-    "reviewCount": 94350,
-    "currentPrice": 499,
-    "originalPrice": 89999,
-    "discount": 99,
-    "badge": "Trending",
-    "deliveryText": "Delivery Tomorrow",
-    "stockLeft": 3,
-    "soldCount": "5855+",
-    "warranty": "1 Year Manufacturer Warranty",
-    "highlights": [
-      "No Cash On Delivery",
-      "7 days Replacement",
-      "Plus (F-Assured)"
-    ],
-    "offers": [
-      "Offer ends in 16min 28sec"
-    ],
-    "details": [
-      "Premium titanium frame for enhanced durability",
-      "Built-in S Pen for productivity and creativity",
-      "6.8-inch Dynamic AMOLED 2X display with QHD+ resolution",
-      "120Hz adaptive refresh rate for smooth experience",
-      "Corning Gorilla Armor protection",
-      "Powered by Snapdragon 8 Gen 3 for Galaxy",
-      "Advanced AI features with Galaxy AI & Circle to Search with Google",
-      "Real-time call translation support",
-      "200MP main camera for professional photography",
-      "Ultra-wide camera for expansive shots",
-      "50MP periscope telephoto lens with up to 5x optical zoom and 100x Space Zoom",
-      "Nightography for stunning low-light photography",
-      "8K video recording capability",
-      "AI photo editing and object removal tools",
-      "12MP front camera for high-quality selfies",
-      "5000mAh long-lasting battery with 45W fast wired charging",
-      "Wireless charging and reverse wireless charging",
-      "5G + Wi-Fi 7 support for ultra-fast connectivity",
-      "Ultrasonic in-display fingerprint sensor",
-      "IP68 water and dust resistance",
-      "Samsung Knox security & One UI with long-term software updates",
-      "Ideal for gaming, business, and content creation"
-    ],
-    "reviews": {
-      "breakdown": [
-        {
-          "s": 5,
-          "v": 64920,
-          "c": "bg-[#388e3c]",
-          "w": "w-[82%]"
-        },
-        {
-          "s": 4,
-          "v": 20340,
-          "c": "bg-[#388e3c]",
-          "w": "w-[58%]"
-        },
-        {
-          "s": 3,
-          "v": 5890,
-          "c": "bg-[#ff9f00]",
-          "w": "w-[12%]"
-        },
-        {
-          "s": 2,
-          "v": 2140,
-          "c": "bg-[#ff9f00]",
-          "w": "w-[7%]"
-        },
-        {
-          "s": 1,
-          "v": 1060,
-          "c": "bg-[#ff6161]",
-          "w": "w-[4%]"
-        }
-      ],
-      "list": [
-        {
-          "rating": 5,
-          "title": "S Pen makes all the difference!",
-          "text": "Having a built-in S Pen is incredibly useful for productivity. The 200MP camera is absolutely stunning.",
-          "author": "Siddharth Rao",
-          "location": "Hyderabad",
-          "time": "1 day ago"
-        },
-        {
-          "rating": 5,
-          "title": "Best Android phone ever!",
-          "text": "Galaxy AI features are genuinely transformative. Circle to Search is something I use dozens of times a day.",
-          "author": "Ananya Bose",
-          "location": "Kolkata",
-          "time": "2 days ago"
-        },
-        {
-          "rating": 4,
-          "title": "Flagship at its finest",
-          "text": "100x Space Zoom is mind-bending. The titanium frame feels incredibly premium and sturdy.",
-          "author": "Karan Mehta",
-          "location": "Jaipur",
-          "time": "1 day ago"
-        },
-        {
-          "rating": 5,
-          "title": "8K video is insane",
-          "text": "8K video recording on a phone is unbelievable. Snapdragon 8 Gen 3 makes it handle everything effortlessly.",
-          "author": "Divya Shah",
-          "location": "Ahmedabad",
-          "time": "2 days ago"
-        },
-        {
-          "rating": 5,
-          "title": "Real-time translation is a game changer",
-          "text": "The real-time call translation feature saved me during an international business call. Simply amazing.",
-          "author": "Rohan Pillai",
-          "location": "Kochi",
-          "time": "1 day ago"
-        }
-      ]
-    },
-    "similarProducts": [
-      {
-        "id": "32",
-        "title": "Pigeon by Stovekraft Hard Anodised Aluminium Pressure Cooker Combo - 2 L, 3 L and 5 L Induction Base Outer Lid Cooker (14414, Black)",
-        "image": "/assets/kitchen/cooker1.png",
-        "price": 395,
-        "emi": 33,
-        "rating": 90,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "33",
-        "title": "Elica Vetro Glass Top 4 Burner Auto Ignition Gas Stove (694 CT VETRO SS AI), Black",
-        "image": "/assets/kitchen/stove1.png",
-        "price": 395,
-        "emi": 33,
-        "rating": 96,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "34",
-        "title": "Havells Instanio 3L Instant Water Heater(Geyser)| Temp. Sensing LED Indicator| Rust & Shock Proof Body| ISI Marked|Warranty: 5 year on Inner Tank| High Rise Compatible (White Blue)",
-        "image": "/assets/kitchen/havells1.png",
-        "price": 495,
-        "emi": 41,
-        "rating": 96,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "31",
-        "title": "Blue Star 45 L Direct Cool Single Door 2 Star Convertible Refrigerator (Graphite - Grey, MR60-GG)",
-        "image": "/assets/electric/bluestar1.png",
-        "price": 399,
-        "emi": 33,
-        "rating": 84,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "30",
-        "title": "Godrej 194 L Direct Cool Single Door 5 Star Refrigerator (Midnight Black, RD E-IMPRESS 215E TDIE MD BM)",
-        "image": "/assets/electric/godrej1.png",
-        "price": 999,
-        "emi": 83,
-        "rating": 88,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "29",
-        "title": "HAVAI RED 18\" Mist Pedestal Fan | High-Speed, Remote & Touch Control, 3.2L Tank, 80W Power, 350 Sq Ft Coverage, Easy Install, Black, 18 Inches",
-        "image": "/assets/electric/havai1.png",
-        "price": 499,
-        "emi": 42,
-        "rating": 68,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "27",
-        "title": "JKR Enterprise 260 W White Electric Whisk, Hand Blender (JKR-2019)",
-        "image": "/assets/electric/jkr1.png",
-        "price": 199,
-        "emi": 17,
-        "rating": 82,
-        "delivery": "Delivery Tomorrow"
-      },
-      {
-        "id": "28",
-        "title": "Green Soul Kiev Orthopedic Office Chair | Ergonomic Design with Rocking Function Fabric Office Executive Chair (Grey, DIY)",
-        "image": "/assets/electric/kiev1.png",
-        "price": 499,
-        "emi": 42,
-        "rating": 82,
-        "delivery": "Delivery Tomorrow"
-      }
-    ]
-  },
-  {
-    "id": "12",
-    "slug": "vivo-v40-pro",
-    "image": "/assets/electric/vivov40-1.png",
-    "images": [
-      "/assets/electric/vivov40-1.png",
-      "/assets/electric/vivov40-2.png",
-      "/assets/electric/vivov40-3.png",
-      "/assets/electric/vivov40-4.png",
-      "/assets/electric/vivov40-5.png",
-      "/assets/electric/vivov40-6.png"
-    ],
-    "title": "Vivo V40 Pro 5G (Titanium Grey, 256 GB) (12 GB RAM)",
-    "rating": 4.4,
-    "reviewCount": 53540,
-    "currentPrice": 299,
-    "originalPrice": 47999,
-    "discount": 99,
-    "badge": "Trending",
-    "deliveryText": "Delivery Tomorrow",
-    "stockLeft": 9,
-    "soldCount": "5354+",
-    "warranty": "1 Year Manufacturer Warranty",
-    "highlights": [
-      "No Cash On Delivery",
-      "7 days Replacement",
-      "Plus (F-Assured)"
-    ],
-    "offers": [
-      "Offer ends in 14min 31sec"
-    ],
-    "details": [
-      "Premium 5G Smartphone with Elegant Design & Solid Build",
-      "50MP ZEISS Telephoto Camera for Professional Quality Photos",
-      "Advanced Camera System with Powerful Zoom Capability",
-      "Crystal Clear Images with ZEISS Optics & Imaging Technology",
-      "High-Resolution Display for Stunning Visual Experience",
-      "Powerful Processor for Smooth Multitasking & Gaming",
-      "Origin OS for Fast, Clean & Productivity-Focused Interface",
-      "Office Productivity Features for Work & Daily Use",
-      "90W FlashCharge for Ultra-Fast Charging in Minutes",
-      "Long-Lasting Battery for All-Day Usage",
-      "5 Years OS Updates for Long-Term Software Support",
-      "7 Years Security Updates for Enhanced Device Protection",
-      "Large Storage Capacity for Apps, Photos & Videos",
-      "Advanced Cooling System for Stable Performance",
-      "5G Connectivity for Super-Fast Internet Speeds",
-      "In-Display Fingerprint Sensor for Secure Unlock",
-      "Premium Camera for Night, Portrait & Landscape Photography",
-      "Slim & Lightweight Design for Comfortable Handling",
-      "Ideal Smartphone for Professionals & Power Users",
-      "Perfect Combination of Performance, Camera & Battery"
-    ],
-    "reviews": {
-      "breakdown": [
-        {
-          "s": 5,
-          "v": 32140,
-          "c": "bg-[#388e3c]",
-          "w": "w-[75%]"
-        },
-        {
-          "s": 4,
-          "v": 14280,
-          "c": "bg-[#388e3c]",
-          "w": "w-[52%]"
-        },
-        {
-          "s": 3,
-          "v": 4210,
-          "c": "bg-[#ff9f00]",
-          "w": "w-[14%]"
-        },
-        {
-          "s": 2,
-          "v": 1690,
-          "c": "bg-[#ff9f00]",
-          "w": "w-[7%]"
-        },
-        {
-          "s": 1,
-          "v": 1220,
-          "c": "bg-[#ff6161]",
-          "w": "w-[5%]"
-        }
-      ],
-      "list": [
-        {
-          "rating": 5,
-          "title": "ZEISS camera is incredible!",
-          "text": "The telephoto camera produces professional-quality photos. Every shot looks crisp and detailed.",
-          "author": "Arjun Sharma",
-          "location": "Delhi",
-          "time": "1 day ago"
-        },
-        {
-          "rating": 4,
-          "title": "90W charging is super fast",
-          "text": "My phone charges from 0 to 100 in under 40 minutes. The battery easily lasts a full day.",
-          "author": "Meera Patel",
-          "location": "Ahmedabad",
-          "time": "2 days ago"
-        },
-        {
-          "rating": 5,
-          "title": "Slim and premium feel",
-          "text": "The Titanium Grey color looks classy and the phone feels incredibly solid in hand.",
-          "author": "Rohit Verma",
-          "location": "Pune",
-          "time": "1 day ago"
-        },
-        {
-          "rating": 4,
-          "title": "Great for work and gaming",
-          "text": "Origin OS is clean and fast. Multitasking is seamless and no apps crash even with heavy use.",
-          "author": "Priya Nair",
-          "location": "Kochi",
-          "time": "3 days ago"
-        },
-        {
-          "rating": 5,
-          "title": "Best camera in this range",
-          "text": "Night mode shots are stunning. ZEISS optics really make a difference for photography lovers.",
-          "author": "Sanjay Kumar",
-          "location": "Chennai",
-          "time": "2 days ago"
         }
       ]
     },
@@ -7038,6 +6041,611 @@
         "rating": 96,
         "delivery": "Delivery Tomorrow"
       }
+    ]
+  },
+  {
+    "id": "35",
+    "slug": "wonderchef-nutri-blend-bolt-600w",
+    "image": "/assets/electric/mixer1.png",
+    "images": [
+      "/assets/electric/mixer1.png",
+      "/assets/electric/mixer2.png",
+      "/assets/electric/mixer3.png",
+      "/assets/electric/mixer4.png",
+      "/assets/electric/mixer5.png"
+    ],
+    "title": "WONDERCHEF Nutri 600 W Juicer Mixer Grinder (Unbreakable Jars, Sharper Steel Blades, 2 Years Warranty, Black | 4 Jars | Black)",
+    "rating": 3.9,
+    "reviewCount": 245,
+    "currentPrice": 399,
+    "originalPrice": 1999,
+    "discount": 80,
+    "badge": "Top Rated",
+    "deliveryText": "Delivery Tomorrow",
+    "highlights": [
+      "22000 RPM Motor",
+      "4 Unbreakable Jars",
+      "Sharper Steel Blades",
+      "2 Years Warranty"
+    ],
+    "offers": [
+      "Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit Card"
+    ],
+    "reviews": {
+      "breakdown": [
+        {
+          "s": 5,
+          "v": 135,
+          "c": "bg-[#388e3c]",
+          "w": "w-[55%]"
+        },
+        {
+          "s": 4,
+          "v": 37,
+          "c": "bg-[#388e3c]",
+          "w": "w-[15%]"
+        },
+        {
+          "s": 3,
+          "v": 18,
+          "c": "bg-[#ff9f00]",
+          "w": "w-[7%]"
+        },
+        {
+          "s": 2,
+          "v": 13,
+          "c": "bg-[#ff9f00]",
+          "w": "w-[5%]"
+        },
+        {
+          "s": 1,
+          "v": 42,
+          "c": "bg-[#ff6161]",
+          "w": "w-[17%]"
+        }
+      ],
+      "list": [
+        {
+          "rating": 2,
+          "title": "Expected a better product",
+          "text": "Never ever take this grander there rubber get disturb during use",
+          "author": "Shobha Kumaarri",
+          "location": "Marar",
+          "time": "May, 2023"
+        },
+        {
+          "rating": 5,
+          "title": "Awesome",
+          "text": "Just like magic",
+          "author": "Naveen Kumar",
+          "location": "Shahjahanpur",
+          "time": "Jun, 2022"
+        },
+        {
+          "rating": 2,
+          "title": "Not good",
+          "text": "Bed quality waste money only two time use is not working bakwas product",
+          "author": "arvind adalja",
+          "location": "Ahmedabad",
+          "time": "6 months ago"
+        },
+        {
+          "rating": 1,
+          "title": "Useless product",
+          "text": "Below average quality; used to be better and quality has gone down significantly",
+          "author": "Flipkart Customer",
+          "location": "Bengaluru",
+          "time": "Jan, 2025"
+        },
+        {
+          "rating": 2,
+          "title": "Slightly disappointed",
+          "text": "Last month I bought one or two times I used now it want repair",
+          "author": "kuchipudi vamsi",
+          "location": "Visakhapatnam",
+          "time": "Nov, 2024"
+        },
+        {
+          "rating": 3,
+          "title": "Does the job",
+          "text": "Quality could have more",
+          "author": "rizwan khan",
+          "location": "New Delhi",
+          "time": "Nov, 2024"
+        },
+        {
+          "rating": 2,
+          "title": "Slightly disappointed",
+          "text": "Not that powerful and like sanjeev kapoor was showing that it grinds perfectly but it doesn't, waste for money if you want it for long run even for 3 years",
+          "author": "Adwit Tiwari",
+          "location": "Chhatarpur",
+          "time": "Aug, 2024"
+        },
+        {
+          "rating": 5,
+          "title": "Wonderful",
+          "text": "Value for money Good product",
+          "author": "Brajesh Kumar Soni",
+          "location": "Gursahaiganj",
+          "time": "Apr, 2024"
+        },
+        {
+          "rating": 3,
+          "title": "Fair",
+          "text": "Very noisy",
+          "author": "Sadhu Elias Arockia",
+          "location": "Mumbai",
+          "time": "Mar, 2024"
+        }
+      ]
+    },
+    "similarProducts": [
+      {
+        "id": "32",
+        "title": "Pigeon by Stovekraft Hard Anodised Aluminium Pressure Cooker Combo - 2 L, 3 L and 5 L Induction Base Outer Lid Cooker (14414, Black)",
+        "image": "/assets/kitchen/cooker1.png",
+        "price": 395,
+        "emi": 33,
+        "rating": 90,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "33",
+        "title": "Elica Vetro Glass Top 4 Burner Auto Ignition Gas Stove (694 CT VETRO SS AI), Black",
+        "image": "/assets/kitchen/stove1.png",
+        "price": 395,
+        "emi": 33,
+        "rating": 96,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "34",
+        "title": "Havells Instanio 3L Instant Water Heater(Geyser)| Temp. Sensing LED Indicator| Rust & Shock Proof Body| ISI Marked|Warranty: 5 year on Inner Tank| High Rise Compatible (White Blue)",
+        "image": "/assets/kitchen/havells1.png",
+        "price": 495,
+        "emi": 41,
+        "rating": 96,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "31",
+        "title": "Blue Star 45 L Direct Cool Single Door 2 Star Convertible Refrigerator (Graphite - Grey, MR60-GG)",
+        "image": "/assets/electric/bluestar1.png",
+        "price": 399,
+        "emi": 33,
+        "rating": 84,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "30",
+        "title": "Godrej 194 L Direct Cool Single Door 5 Star Refrigerator (Midnight Black, RD E-IMPRESS 215E TDIE MD BM)",
+        "image": "/assets/electric/godrej1.png",
+        "price": 999,
+        "emi": 83,
+        "rating": 88,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "29",
+        "title": "HAVAI RED 18\" Mist Pedestal Fan | High-Speed, Remote & Touch Control, 3.2L Tank, 80W Power, 350 Sq Ft Coverage, Easy Install, Black, 18 Inches",
+        "image": "/assets/electric/havai1.png",
+        "price": 499,
+        "emi": 42,
+        "rating": 68,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "27",
+        "title": "JKR Enterprise 260 W White Electric Whisk, Hand Blender (JKR-2019)",
+        "image": "/assets/electric/jkr1.png",
+        "price": 199,
+        "emi": 17,
+        "rating": 82,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "28",
+        "title": "Green Soul Kiev Orthopedic Office Chair | Ergonomic Design with Rocking Function Fabric Office Executive Chair (Grey, DIY)",
+        "image": "/assets/electric/kiev1.png",
+        "price": 499,
+        "emi": 42,
+        "rating": 82,
+        "delivery": "Delivery Tomorrow"
+      }
+    ],
+    "stockLeft": 15,
+    "soldCount": "2145+",
+    "warranty": "2 Years Warranty",
+    "details": [
+      "WONDERCHEF Nutri-blend BOLT Complete Kitchen Machine",
+      "600 W robust motor can grind ingredients at speeds of up to 22,000 RPM",
+      "Extracts nutrients from fruits and vegetables",
+      "Compact design allows it to fit into any corner of your kitchen counter",
+      "Includes a large jar for shakes, a juicer attachment, and a chopper",
+      "Features 4 Unbreakable Jars and Sharper Steel Blades",
+      "Recipe book by Chef Sanjeev Kapoor included"
+    ]
+  },
+  {
+    "id": "36",
+    "slug": "agaro-ace-wet-dry-vacuum-cleaner",
+    "image": "/assets/electric/vacuum1.png",
+    "images": [
+      "/assets/electric/vacuum1.png",
+      "/assets/electric/vacuum2.png",
+      "/assets/electric/vacuum3.png",
+      "/assets/electric/vacuum4.png",
+      "/assets/electric/vacuum5.png"
+    ],
+    "title": "AGARO Ace Wet & Dry Vacuum Cleaner 1600 Watts, 21.5 kPa Suction Power with Dust Bag, 21 litres Tank Capacity, for Home Use, (Black, Red)",
+    "rating": 4.3,
+    "reviewCount": 13349,
+    "currentPrice": 399,
+    "originalPrice": 9999,
+    "discount": 96,
+    "badge": "Top Seller",
+    "deliveryText": "Delivery Tomorrow",
+    "highlights": [
+      "1600 Watts Motor",
+      "21.5 kPa Suction Power",
+      "Wet & Dry Cleaning",
+      "21 Litres Tank Capacity"
+    ],
+    "offers": [
+      "Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit Card"
+    ],
+    "reviews": {
+      "breakdown": [
+        {
+          "s": 5,
+          "v": 7684,
+          "c": "bg-[#388e3c]",
+          "w": "w-[57%]"
+        },
+        {
+          "s": 4,
+          "v": 3676,
+          "c": "bg-[#388e3c]",
+          "w": "w-[27%]"
+        },
+        {
+          "s": 3,
+          "v": 930,
+          "c": "bg-[#ff9f00]",
+          "w": "w-[7%]"
+        },
+        {
+          "s": 2,
+          "v": 276,
+          "c": "bg-[#ff9f00]",
+          "w": "w-[2%]"
+        },
+        {
+          "s": 1,
+          "v": 783,
+          "c": "bg-[#ff6161]",
+          "w": "w-[6%]"
+        }
+      ],
+      "list": [
+        {
+          "rating": 4,
+          "title": "Nice product",
+          "text": "Does the job so well. Advantage is it doesn't have much noise.",
+          "author": "Jabeen Syed",
+          "location": "Chennai",
+          "time": "Apr, 2022"
+        },
+        {
+          "rating": 5,
+          "title": "Super!",
+          "text": "Very easy to install, easy to handle, powerful suction. Lightweight.",
+          "author": "sadhana gautam",
+          "location": "Lucknow",
+          "time": "Jun, 2021"
+        },
+        {
+          "rating": 4,
+          "title": "Very Good",
+          "text": "Suction power is perfect and value for money.",
+          "author": "Tanmoy Chakraborty",
+          "location": "Guwahati",
+          "time": "Apr, 2022"
+        },
+        {
+          "rating": 5,
+          "title": "Brilliant",
+          "text": "So nice suction and build quality is nice and through this budget vacuum cleaner and the best.",
+          "author": "CHALLA LAXMI PRASANNA",
+          "location": "Vijayawada",
+          "time": "Jun, 2021"
+        },
+        {
+          "rating": 5,
+          "title": "Super!",
+          "text": "It's really nice vaccum cleaner. The suction and blower power is really good.",
+          "author": "PRASHANT KUMAR",
+          "location": "Bangalore",
+          "time": "Apr, 2021"
+        }
+      ]
+    },
+    "similarProducts": [
+      {
+        "id": "32",
+        "title": "Pigeon by Stovekraft Hard Anodised Aluminium Pressure Cooker Combo - 2 L, 3 L and 5 L Induction Base Outer Lid Cooker (14414, Black)",
+        "image": "/assets/kitchen/cooker1.png",
+        "price": 395,
+        "emi": 33,
+        "rating": 90,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "33",
+        "title": "Elica Vetro Glass Top 4 Burner Auto Ignition Gas Stove (694 CT VETRO SS AI), Black",
+        "image": "/assets/kitchen/stove1.png",
+        "price": 395,
+        "emi": 33,
+        "rating": 96,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "34",
+        "title": "Havells Instanio 3L Instant Water Heater(Geyser)| Temp. Sensing LED Indicator| Rust & Shock Proof Body| ISI Marked|Warranty: 5 year on Inner Tank| High Rise Compatible (White Blue)",
+        "image": "/assets/kitchen/havells1.png",
+        "price": 495,
+        "emi": 41,
+        "rating": 96,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "31",
+        "title": "Blue Star 45 L Direct Cool Single Door 2 Star Convertible Refrigerator (Graphite - Grey, MR60-GG)",
+        "image": "/assets/electric/bluestar1.png",
+        "price": 399,
+        "emi": 33,
+        "rating": 84,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "30",
+        "title": "Godrej 194 L Direct Cool Single Door 5 Star Refrigerator (Midnight Black, RD E-IMPRESS 215E TDIE MD BM)",
+        "image": "/assets/electric/godrej1.png",
+        "price": 999,
+        "emi": 83,
+        "rating": 88,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "29",
+        "title": "HAVAI RED 18\" Mist Pedestal Fan | High-Speed, Remote & Touch Control, 3.2L Tank, 80W Power, 350 Sq Ft Coverage, Easy Install, Black, 18 Inches",
+        "image": "/assets/electric/havai1.png",
+        "price": 499,
+        "emi": 42,
+        "rating": 68,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "27",
+        "title": "JKR Enterprise 260 W White Electric Whisk, Hand Blender (JKR-2019)",
+        "image": "/assets/electric/jkr1.png",
+        "price": 199,
+        "emi": 17,
+        "rating": 82,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "28",
+        "title": "Green Soul Kiev Orthopedic Office Chair | Ergonomic Design with Rocking Function Fabric Office Executive Chair (Grey, DIY)",
+        "image": "/assets/electric/kiev1.png",
+        "price": 499,
+        "emi": 42,
+        "rating": 82,
+        "delivery": "Delivery Tomorrow"
+      }
+    ],
+    "stockLeft": 42,
+    "soldCount": "10000+",
+    "warranty": "1 Year Warranty",
+    "details": [
+      "5 Stage Filtration Process",
+      "360 Degree Swivel Hose",
+      "21 litres stainless steel dust collection jar",
+      "21.5 Kpa Suction power",
+      "5 meters long cord",
+      "Can be used with different accessories, versatile and convenient",
+      "HEPA Filtration system"
+    ]
+  },
+  {
+    "id": "37",
+    "slug": "leader-tango-27-5t-premium-mtb-bike",
+    "image": "/assets/electric/cycle1.png",
+    "images": [
+      "/assets/electric/cycle1.png",
+      "/assets/electric/cycle2.png",
+      "/assets/electric/cycle3.png",
+      "/assets/electric/cycle4.png",
+      "/assets/electric/cycle5.png"
+    ],
+    "title": "LEADER Tango 27.5T Premium MTB Bike/ Cycle for Men | Precision 7-Speed Gear Bicycle",
+    "rating": 3.7,
+    "reviewCount": 105,
+    "currentPrice": 467,
+    "originalPrice": 21999,
+    "discount": 97,
+    "badge": "Special Price",
+    "deliveryText": "Delivery Tomorrow",
+    "highlights": [
+      "7 Speed Gear",
+      "27.5 inch Tire Size",
+      "Front Suspension",
+      "Disc Brakes"
+    ],
+    "offers": [
+      "Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit Card"
+    ],
+    "reviews": {
+      "breakdown": [
+        {
+          "s": 5,
+          "v": 46,
+          "c": "bg-[#388e3c]",
+          "w": "w-[44%]"
+        },
+        {
+          "s": 4,
+          "v": 22,
+          "c": "bg-[#388e3c]",
+          "w": "w-[21%]"
+        },
+        {
+          "s": 3,
+          "v": 14,
+          "c": "bg-[#ff9f00]",
+          "w": "w-[13%]"
+        },
+        {
+          "s": 2,
+          "v": 9,
+          "c": "bg-[#ff9f00]",
+          "w": "w-[8%]"
+        },
+        {
+          "s": 1,
+          "v": 14,
+          "c": "bg-[#ff6161]",
+          "w": "w-[13%]"
+        }
+      ],
+      "list": [
+        {
+          "rating": 5,
+          "title": "Awesome",
+          "text": "This bicycle is very good looking and very strong",
+          "author": "Souvik Pakhira",
+          "location": "Haora District",
+          "time": "9 months ago"
+        },
+        {
+          "rating": 5,
+          "title": "Terrific",
+          "text": "Nice",
+          "author": "Yogesh Chaudhari",
+          "location": "Surat",
+          "time": "Aug, 2023"
+        },
+        {
+          "rating": 5,
+          "title": "Must buy!",
+          "text": "Nice products",
+          "author": "Antariksh Kerkar",
+          "location": "Ponda",
+          "time": "Feb, 2025"
+        },
+        {
+          "rating": 3,
+          "title": "Decent product",
+          "text": "All good build quality also good, but the fitting instrument alignedkey which is provided is not fitted , trouble 😞 I need arranged another to fitted",
+          "author": "Illias Alam",
+          "location": "Lower Assam Division",
+          "time": "11 months ago"
+        },
+        {
+          "rating": 4,
+          "title": "Nice product",
+          "text": "Good cycle but gare can improve and transportation can improve very much because there are dent on cycle",
+          "author": "Flipkart Customer",
+          "location": "Bettiah",
+          "time": "3 months ago"
+        }
+      ]
+    },
+    "similarProducts": [
+      {
+        "id": "32",
+        "title": "Pigeon by Stovekraft Hard Anodised Aluminium Pressure Cooker Combo - 2 L, 3 L and 5 L Induction Base Outer Lid Cooker (14414, Black)",
+        "image": "/assets/kitchen/cooker1.png",
+        "price": 395,
+        "emi": 33,
+        "rating": 90,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "33",
+        "title": "Elica Vetro Glass Top 4 Burner Auto Ignition Gas Stove (694 CT VETRO SS AI), Black",
+        "image": "/assets/kitchen/stove1.png",
+        "price": 395,
+        "emi": 33,
+        "rating": 96,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "34",
+        "title": "Havells Instanio 3L Instant Water Heater(Geyser)| Temp. Sensing LED Indicator| Rust & Shock Proof Body| ISI Marked|Warranty: 5 year on Inner Tank| High Rise Compatible (White Blue)",
+        "image": "/assets/kitchen/havells1.png",
+        "price": 495,
+        "emi": 41,
+        "rating": 96,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "31",
+        "title": "Blue Star 45 L Direct Cool Single Door 2 Star Convertible Refrigerator (Graphite - Grey, MR60-GG)",
+        "image": "/assets/electric/bluestar1.png",
+        "price": 399,
+        "emi": 33,
+        "rating": 84,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "30",
+        "title": "Godrej 194 L Direct Cool Single Door 5 Star Refrigerator (Midnight Black, RD E-IMPRESS 215E TDIE MD BM)",
+        "image": "/assets/electric/godrej1.png",
+        "price": 999,
+        "emi": 83,
+        "rating": 88,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "29",
+        "title": "HAVAI RED 18\" Mist Pedestal Fan | High-Speed, Remote & Touch Control, 3.2L Tank, 80W Power, 350 Sq Ft Coverage, Easy Install, Black, 18 Inches",
+        "image": "/assets/electric/havai1.png",
+        "price": 499,
+        "emi": 42,
+        "rating": 68,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "27",
+        "title": "JKR Enterprise 260 W White Electric Whisk, Hand Blender (JKR-2019)",
+        "image": "/assets/electric/jkr1.png",
+        "price": 199,
+        "emi": 17,
+        "rating": 82,
+        "delivery": "Delivery Tomorrow"
+      },
+      {
+        "id": "28",
+        "title": "Green Soul Kiev Orthopedic Office Chair | Ergonomic Design with Rocking Function Fabric Office Executive Chair (Grey, DIY)",
+        "image": "/assets/electric/kiev1.png",
+        "price": 499,
+        "emi": 42,
+        "rating": 82,
+        "delivery": "Delivery Tomorrow"
+      }
+    ],
+    "stockLeft": 12,
+    "soldCount": "500+",
+    "warranty": "No Warranty",
+    "details": [
+      "Tango 27.5T Premium MTB Bike/ Cycle for Men",
+      "Steel Cycle/Mild steel Cycle frame",
+      "27.5 x 2.10 Extra Wide Tyres",
+      "Front Suspension & Disc Brakes",
+      "7 Speed Easy Fire Shifters",
+      "Rider Height 5.4 FT – 6.2 FT",
+      "Weight: 20 kg"
     ]
   }
 ]
