@@ -1,11 +1,12 @@
 import React from "react";
-import { ArrowLeft, Search, ShoppingCart, Heart, Share2, Star, CheckCircle2, AlertCircle, RotateCcw, Banknote, ShieldCheck, Clock } from "lucide-react";
+import { ArrowLeft, Search, ShoppingCart, Heart, Share2, Star, CheckCircle2, AlertCircle, RotateCcw, Banknote, ShieldCheck, Clock, Flame, PackageCheck } from "lucide-react";
 import Link from "next/link";
 import fAssuredImg from "@/assets/flipkart-assured.png";
 import wowImg from "@/assets/wow.png";
 import products from "@/data/products.json";
 import ProductCarousel from "./ProductCarousel";
 import ProductActions from "./ProductActions";
+import LiveTimer from "@/components/LiveTimer";
 
 // Reviews and Similar Products are now loaded dynamically from products.json
 
@@ -31,7 +32,6 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                 <div className="flex items-center gap-5">
                     <Search className="w-[22px] h-[22px]" strokeWidth={2.5} />
                     <ShoppingCart className="w-[22px] h-[22px]" strokeWidth={2.5} />
-                    <span className="font-medium text-[15px]">Login</span>
                 </div>
             </div>
 
@@ -46,6 +46,24 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                 </div>
             </div>
 
+            {/* Sold Count + Stock Banner */}
+            {(product.soldCount || product.stockLeft) && (
+                <div className="flex items-stretch">
+                    {product.soldCount && (
+                        <div className="flex-1 bg-[#388e3c] text-white text-[11px] font-bold px-3 py-2 flex items-center gap-1.5">
+                            <Flame className="w-3.5 h-3.5 fill-white" />
+                            <span>{product.soldCount} Sold In Last 7 Days</span>
+                        </div>
+                    )}
+                    {product.stockLeft && (
+                        <div className="bg-[#d32f2f] text-white text-[11px] font-bold px-3 py-2 flex items-center gap-1.5">
+                            <PackageCheck className="w-3.5 h-3.5" />
+                            <span>Only {product.stockLeft} Left</span>
+                        </div>
+                    )}
+                </div>
+            )}
+
             {/* Title & Badges */}
             <div className="bg-white px-4 pt-3 pb-2 shadow-sm">
                 <h1 className="text-[15px] text-[#212121] leading-[1.3] mb-2 font-medium">
@@ -57,19 +75,18 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                     <img src={fAssuredImg.src} className="h-[14px] object-contain ml-1" alt="Plus F-Assured" />
                 </div>
 
-                <div className="flex items-center gap-1 text-[#388e3c] font-bold text-[14px] mb-2 mt-1">
-                    <span>{(product.rating / 5) * 100}%</span>
-                    <span className="bg-[#388e3c] text-white w-3 h-3 rounded-full flex items-center justify-center ml-0.5"><div className="w-1.5 h-1.5 border-t border-r border-white transform rotate-45 -translate-x-[0.5px] translate-y-[0.5px]"></div></span> {/* Fake tiny arrow-up visualizer */}
-                </div>
-
                 {/* Pricing & Offers */}
                 <div className="mt-1 mb-2">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                        <span className="text-[#388e3c] text-[13px] font-bold">{product.discount}% off</span>
+                        {product.originalPrice && <span className="text-[#878787] text-[13px] line-through font-medium">₹{product.originalPrice.toLocaleString()}</span>}
+                    </div>
+                    <div className="flex items-center gap-2 mt-0.5">
                         <span className="text-[#212121] text-[26px] font-bold leading-none tracking-tight">₹{product.currentPrice.toLocaleString()}</span>
                     </div>
 
                     <div className="flex items-center gap-1.5 mt-2 bg-red-50 text-[#d32f2f] border border-red-100 px-2 py-1 rounded w-fit font-bold text-[11px] tracking-wide">
-                        <Clock className="w-3.5 h-3.5" strokeWidth={3} /> <span>Offer ends in 12min 30sec</span>
+                        <Clock className="w-3.5 h-3.5" strokeWidth={3} /> <LiveTimer type="offer" initialMinutes={12} initialSeconds={30} />
                     </div>
                 </div>
 
@@ -97,7 +114,32 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                         <span className="text-[11px] text-[#212121] font-medium leading-tight text-[#f3993e]">Plus<br />(F-Assured)</span>
                     </div>
                 </div>
+
+                {/* Warranty */}
+                {product.warranty && (
+                    <div className="flex items-center gap-2 border-t border-gray-100 pt-3 mt-1 pb-1">
+                        <CheckCircle2 className="w-4 h-4 text-[#388e3c] flex-shrink-0" />
+                        <span className="text-[12px] text-[#212121] font-medium">{product.warranty}</span>
+                    </div>
+                )}
             </div>
+
+            {/* Product Details Bullet List */}
+            {product.details && product.details.length > 0 && (
+                <div className="bg-white mt-1.5 shadow-sm">
+                    <div className="px-4 py-3 border-b border-gray-100">
+                        <h2 className="text-[15px] font-bold text-[#212121]">Product Detail</h2>
+                    </div>
+                    <ul className="px-4 py-3 space-y-2">
+                        {product.details.map((detail: string, i: number) => (
+                            <li key={i} className="flex items-start gap-2 text-[13px] text-[#212121] leading-[1.4]">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#2874f0] flex-shrink-0 mt-[6px]" />
+                                {detail}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
 
             {/* Ratings & Reviews Breakdown */}
             {product.reviews && (
@@ -110,16 +152,16 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                         {/* Overall Rating Circular visualizer */}
                         <div className="flex flex-col items-center justify-center min-w-[90px]">
                             <div className="text-[36px] text-[#212121] font-bold flex items-center leading-none mb-1">
-                                4.9 <Star className="w-5 h-5 fill-[#212121] text-[#212121] ml-1.5" />
+                                {product.rating} <Star className="w-5 h-5 fill-[#212121] text-[#212121] ml-1.5" />
                             </div>
                             <div className="text-[#878787] text-[12px] font-medium -mt-1">{product.reviewCount.toLocaleString()}</div>
                             <div className="text-[#878787] text-[12px] font-medium">Ratings &</div>
-                            <div className="text-[#878787] text-[12px] font-medium">1,000 Reviews</div>
+                            <div className="text-[#878787] text-[12px] font-medium">{product.reviews?.list?.length || 0} Reviews</div>
                         </div>
 
                         {/* Bars */}
                         <div className="flex-1 space-y-1.5 mt-1 border-l border-gray-100 pl-4 py-1">
-                            {[{ s: 5, v: 45948, c: "bg-[#388e3c]", w: "w-[80%]" }, { s: 4, v: 32254, c: "bg-[#388e3c]", w: "w-[60%]" }, { s: 3, v: 5946, c: "bg-[#ff9f00]", w: "w-[15%]" }, { s: 2, v: 4865, c: "bg-[#ff9f00]", w: "w-[10%]" }, { s: 1, v: 3784, c: "bg-[#ff6161]", w: "w-[8%]" }].map((bar) => (
+                            {(product.reviews?.breakdown || []).map((bar: any) => (
                                 <div key={bar.s} className="flex items-center text-[11px] gap-2">
                                     <span className="w-2 font-medium text-[#212121]">{bar.s}</span>
                                     <Star className="w-2 h-2 fill-gray-400 text-gray-400 -mt-[1px]" />
@@ -134,57 +176,33 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
                     <div className="w-full h-2 bg-[#f1f3f6]"></div>
 
-                    {/* Single Review Template 1 */}
-                    <div className="px-4 py-4 border-b border-gray-100">
-                        <div className="flex items-center gap-2 mb-2">
-                            <span className="bg-[#388e3c] text-white text-[11px] font-bold px-1.5 py-[2px] rounded border border-gray-100 shadow-sm flex items-center gap-1">5 <Star className="w-2.5 h-2.5 fill-white" /></span>
-                            <span className="text-[13px] font-bold text-[#212121]">Excellent Pressure Handi</span>
-                        </div>
-                        <p className="text-[13px] text-[#212121] leading-[1.4] mb-3 pr-4">
-                            Heats evenly and cooks food perfectly. Very happy with this purchase.
-                        </p>
-                        <div className="w-[45px] h-[45px] border border-gray-200 rounded-[3px] overflow-hidden mb-3">
-                            <img src={product.image} className="w-full h-full object-cover Mix-Blend-Multiply bg-[#f1f3f6]" alt="User Image" />
-                        </div>
-                        <div className="flex items-center justify-between mt-1">
-                            <div className="flex flex-col">
-                                <span className="text-[11px] text-[#878787] font-medium flex items-center">
-                                    Aditya Mehra
-                                    <span className="w-[10px] h-[10px] bg-gray-400 text-white rounded-full flex items-center justify-center text-[6px] ml-2 mr-1">✓</span>
-                                    <span className="text-[10px] font-normal">Certified Buyer, Bangalore</span>
+                    {/* Dynamic Review Cards */}
+                    {(product.reviews?.list || []).map((review: any, i: number) => (
+                        <div key={i} className="px-4 py-4 border-b border-gray-100">
+                            <div className="flex items-center gap-2 mb-2">
+                                <span className="bg-[#388e3c] text-white text-[11px] font-bold px-1.5 py-[2px] rounded border border-gray-100 shadow-sm flex items-center gap-1">
+                                    {review.rating} <Star className="w-2.5 h-2.5 fill-white" />
                                 </span>
+                                <span className="text-[13px] font-bold text-[#212121]">{review.title}</span>
                             </div>
-                            <div className="flex items-center gap-4 text-[#878787]">
-                                <span className="text-[11px]">1 day ago</span>
+                            <p className="text-[13px] text-[#212121] leading-[1.4] mb-3 pr-4">{review.text}</p>
+                            <div className="w-[45px] h-[45px] border border-gray-200 rounded-[3px] overflow-hidden mb-3">
+                                <img src={product.image} className="w-full h-full object-cover Mix-Blend-Multiply bg-[#f1f3f6]" alt="User Image" />
                             </div>
-                        </div>
-                    </div>
-
-                    {/* Single Review Template 2 */}
-                    <div className="px-4 py-4 border-b border-gray-100">
-                        <div className="flex items-center gap-2 mb-2">
-                            <span className="bg-[#388e3c] text-white text-[11px] font-bold px-1.5 py-[2px] rounded border border-gray-100 shadow-sm flex items-center gap-1">4 <Star className="w-2.5 h-2.5 fill-white" /></span>
-                            <span className="text-[13px] font-bold text-[#212121]">Highly Recommended</span>
-                        </div>
-                        <p className="text-[13px] text-[#212121] leading-[1.4] mb-3 pr-4">
-                            Strong and durable. Very convenient for daily cooking.
-                        </p>
-                        <div className="w-[45px] h-[45px] border border-gray-200 rounded-[3px] overflow-hidden mb-3">
-                            <img src={product.image} className="w-full h-full object-cover Mix-Blend-Multiply bg-[#f1f3f6]" alt="User Image" />
-                        </div>
-                        <div className="flex items-center justify-between mt-1">
-                            <div className="flex flex-col">
-                                <span className="text-[11px] text-[#878787] font-medium flex items-center">
-                                    Neha Kapoor
-                                    <span className="w-[10px] h-[10px] bg-gray-400 text-white rounded-full flex items-center justify-center text-[6px] ml-2 mr-1">✓</span>
-                                    <span className="text-[10px] font-normal">Certified Buyer, Chennai</span>
-                                </span>
-                            </div>
-                            <div className="flex items-center gap-4 text-[#878787]">
-                                <span className="text-[11px]">2 days ago</span>
+                            <div className="flex items-center justify-between mt-1">
+                                <div className="flex flex-col">
+                                    <span className="text-[11px] text-[#878787] font-medium flex items-center">
+                                        {review.author}
+                                        <span className="w-[10px] h-[10px] bg-gray-400 text-white rounded-full flex items-center justify-center text-[6px] ml-2 mr-1">✓</span>
+                                        <span className="text-[10px] font-normal">Verified Purchase, {review.location}</span>
+                                    </span>
+                                </div>
+                                <div className="flex items-center gap-4 text-[#878787]">
+                                    <span className="text-[11px]">{review.time}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    ))}
                 </div>
             )}
 
@@ -197,7 +215,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
                     <div className="grid grid-cols-2 gap-[1px] bg-gray-200 w-full">
                         {product.similarProducts.map((item: any) => (
-                            <Link href={`/product/${item.id}`} key={item.id} className="bg-white p-3 flex flex-col relative pointer-events-none">
+                            <Link href={`/product/${item.id}`} key={item.id} className="bg-white p-3 flex flex-col relative">
                                 <div className="absolute top-2 right-2 p-1.5 bg-gray-50 border border-gray-100 rounded-full flex items-center justify-center z-10 shadow-sm">
                                     <Heart className="w-[14px] h-[14px] text-gray-400" />
                                 </div>

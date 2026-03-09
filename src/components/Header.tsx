@@ -32,7 +32,6 @@ export default function Header() {
                             </span>
                         )}
                     </Link>
-                    <span className="text-sm font-medium">Login</span>
                 </div>
             </div>
 

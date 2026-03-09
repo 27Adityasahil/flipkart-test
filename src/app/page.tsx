@@ -6,6 +6,7 @@ import categoriesImg from '@/assets/categories-strip.png';
 import productsData from '@/data/products.json';
 import { Product } from '@/context/CartContext';
 import { Clock } from 'lucide-react';
+import LiveTimer from '@/components/LiveTimer';
 
 export default function HomePage() {
   const products: Product[] = productsData as Product[];
@@ -33,7 +34,9 @@ export default function HomePage() {
               <h2 className="text-[18px] font-bold text-[#2874f0]">Deals of the Day</h2>
               <div className="flex items-center text-[#2874f0] space-x-1.5 mt-0.5">
                 <Clock className="w-4 h-4" />
-                <span className="text-lg font-medium tracking-wider">05:18</span>
+                <span className="text-lg font-medium tracking-wider">
+                  <LiveTimer type="sale" initialMinutes={5} initialSeconds={18} />
+                </span>
               </div>
             </div>
             <button className="border border-gray-200 text-red-500 font-bold px-4 py-2 rounded shadow-sm text-sm bg-white">
