@@ -113,7 +113,7 @@ export default function SummaryPage() {
 
                 <div className="space-y-4 text-[15px] text-gray-800">
                     <div className="flex justify-between">
-                        <span>Price ({cartCount} items)</span>
+                        <span>Price (1 item)</span>
                         <span>₹{(cartTotal + discountTotal).toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between">

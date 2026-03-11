@@ -60,10 +60,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     try {
       const savedCart = localStorage.getItem('cart');
       if (savedCart) setCart(JSON.parse(savedCart));
-      
+
       const savedAddress = localStorage.getItem('address');
       if (savedAddress) setAddress(JSON.parse(savedAddress));
-      
+
       const savedPayment = localStorage.getItem('paymentMethod');
       if (savedPayment) setPaymentMethod(savedPayment);
     } catch (e) {
@@ -82,17 +82,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [cart, address, paymentMethod, isLoaded]);
 
   const addToCart = (product: Product) => {
-    setCart((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
-      if (existing) {
-        return prev.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      return [...prev, { ...product, quantity: 1 }];
-    });
+    setCart([{ ...product, quantity: 1 }]);
   };
 
   const removeFromCart = (productId: string) => {

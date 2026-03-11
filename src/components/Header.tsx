@@ -24,14 +24,9 @@ export default function Header() {
 
                 <div className="flex items-center space-x-4">
                     <Bell className="w-5 h-5" />
-                    <Link href="/cart" className="relative group flex items-center">
+                    <div className="relative group flex items-center cursor-default">
                         <ShoppingCart className="w-5 h-5" />
-                        {cartCount > 0 && (
-                            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center border border-[#2874f0]">
-                                {cartCount}
-                            </span>
-                        )}
-                    </Link>
+                    </div>
                 </div>
             </div>
 

@@ -39,7 +39,7 @@ export default function CartPage() {
                 <button onClick={() => router.back()} className="mr-4">
                     <ArrowLeft className="w-6 h-6" />
                 </button>
-                <h1 className="text-[16px] font-medium">My Cart ({cartCount})</h1>
+                <h1 className="text-[16px] font-medium">My Cart (1 item)</h1>
             </div>
 
             {/* Deliver to placeholder */}
@@ -59,17 +59,8 @@ export default function CartPage() {
                                         <img src={item.image} alt={item.title} className="w-full h-auto object-contain mb-3 cursor-pointer" />
                                     </Link>
                                     <div className="relative inline-block w-full">
-                                        <select
-                                            value={item.quantity}
-                                            onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
-                                            className="w-full appearance-none bg-white border border-gray-300 text-gray-700 py-1 pl-2 pr-6 rounded shadow-sm text-sm focus:outline-none"
-                                        >
-                                            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => (
-                                                <option key={num} value={num}>Qty: {num}</option>
-                                            ))}
-                                        </select>
-                                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1 text-gray-700">
-                                            <ChevronDown className="w-4 h-4" />
+                                        <div className="w-full bg-gray-100 border border-gray-200 text-gray-700 py-1 px-2 rounded shadow-sm text-sm text-center">
+                                            Qty: 1
                                         </div>
                                     </div>
                                 </div>
@@ -139,7 +130,7 @@ export default function CartPage() {
 
                 <div className="space-y-4 text-[14px] text-gray-800">
                     <div className="flex justify-between">
-                        <span>Price ({cartCount} items)</span>
+                        <span>Price (1 item)</span>
                         <span>₹{(cartTotal + discountTotal).toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between">

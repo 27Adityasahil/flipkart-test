@@ -198,7 +198,7 @@ export default function PaymentPage() {
             {/* Price Breakdown */}
             <div className="bg-[#f5f7fa] px-4 py-4 border-b border-gray-200">
                 <div className="flex justify-between items-center text-[15px] text-gray-700 mb-2">
-                    <span>Price ({cartCount} items)</span>
+                    <span>Price (1 item)</span>
                     <span className="font-medium text-gray-900">₹{base.toLocaleString()}</span>
                 </div>
                 {selectedOpt.discountPct > 0 && (
