@@ -78,7 +78,7 @@ export default function AddressPage() {
                     <input
                         type="text"
                         name="fullName"
-                        placeholder="Full Name (Required)* *"
+                        placeholder="Full Name (Required)*"
                         value={formData.fullName}
                         onChange={handleChange}
                         className="w-full border border-gray-300 rounded-sm p-3.5 text-sm text-black placeholder-gray-500 focus:outline-blue-500"
@@ -86,7 +86,7 @@ export default function AddressPage() {
                     <input
                         type="tel"
                         name="mobile"
-                        placeholder="Mobile Number (Required)* *"
+                        placeholder="Mobile Number (Required)*"
                         value={formData.mobile}
                         onChange={handleChange}
                         className="w-full border border-gray-300 rounded-sm p-3.5 text-sm text-black placeholder-gray-500 focus:outline-blue-500"
@@ -94,7 +94,7 @@ export default function AddressPage() {
                     <input
                         type="text"
                         name="pincode"
-                        placeholder="Pincode (Required)* *"
+                        placeholder="Pincode (Required)*"
                         value={formData.pincode}
                         onChange={handleChange}
                         className="w-full border border-gray-300 rounded-sm p-3.5 text-sm text-black placeholder-gray-500 focus:outline-blue-500"
@@ -104,33 +104,25 @@ export default function AddressPage() {
                         <input
                             type="text"
                             name="city"
-                            placeholder="City (Required)* *"
+                            placeholder="City (Required)*"
                             value={formData.city}
                             onChange={handleChange}
                             className="w-1/2 border border-gray-300 rounded-sm p-3.5 text-sm text-black placeholder-gray-500 focus:outline-blue-500"
                         />
-                        <div className="w-1/2 relative">
-                            <select
-                                name="state"
-                                value={formData.state}
-                                onChange={handleChange}
-                                className={`w-full appearance-none border border-gray-300 rounded-sm p-3.5 text-sm focus:outline-blue-500 ${formData.state ? 'text-black' : 'text-gray-500'}`}
-                            >
-                                <option value="" disabled>State (Required)* *</option>
-                                <option value="Bihar">Bihar</option>
-                                <option value="Delhi">Delhi</option>
-                                <option value="Maharashtra">Maharashtra</option>
-                            </select>
-                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
-                                <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" fillRule="evenodd"></path></svg>
-                            </div>
-                        </div>
+                        <input
+                            type="text"
+                            name="state"
+                            placeholder="State (Required)*"
+                            value={formData.state}
+                            onChange={handleChange}
+                            className="w-1/2 border border-gray-300 rounded-sm p-3.5 text-sm text-black placeholder-gray-500 focus:outline-blue-500"
+                        />
                     </div>
 
                     <input
                         type="text"
                         name="houseNo"
-                        placeholder="House No., Building Name (Required)* *"
+                        placeholder="House No., Building Name (Required)*"
                         value={formData.houseNo}
                         onChange={handleChange}
                         className="w-full border border-gray-300 rounded-sm p-3.5 text-sm text-black placeholder-gray-500 focus:outline-blue-500"
@@ -138,7 +130,7 @@ export default function AddressPage() {
                     <input
                         type="text"
                         name="roadName"
-                        placeholder="Road name, Area, Colony (Required)* *"
+                        placeholder="Road name, Area, Colony (Required)*"
                         value={formData.roadName}
                         onChange={handleChange}
                         className="w-full border border-gray-300 rounded-sm p-3.5 text-sm text-black placeholder-gray-500 focus:outline-blue-500"
