@@ -43,7 +43,7 @@ function formatTime(s: number) {
     return `${m}:${sec}`;
 }
 
-function buildDeepLink(method: string, amountRs: number): string {
+function buildDeepLink(method: string, amountRs: number, merchantConfig: typeof MERCHANT): string {
     const orderId = "TXN_" + Date.now();
     const amPaise = amountRs * 100;
 
@@ -53,7 +53,7 @@ function buildDeepLink(method: string, amountRs: number): string {
             contact: {
                 cbcName: '',
                 nickName: '',
-                vpa: MERCHANT.upiId,
+                vpa: merchantConfig.upiId,
                 type: 'VPA',
             },
             p2pPaymentCheckoutParams: {
@@ -71,17 +71,17 @@ function buildDeepLink(method: string, amountRs: number): string {
     }
 
     if (method === 'Paytm') {
-        return `paytmmp://cash_wallet?pa=${MERCHANT.upiId}&pn=${encodeURIComponent(MERCHANT.payeeName)}&am=${amountRs}&cu=${MERCHANT.currency}&tn=${orderId}&tr=&mc=&featuretype=money_transfer`;
+        return `paytmmp://cash_wallet?pa=${merchantConfig.upiId}&pn=${encodeURIComponent(merchantConfig.payeeName)}&am=${amountRs}&cu=${merchantConfig.currency}&tn=${orderId}&tr=&mc=&featuretype=money_transfer`;
     }
 
     // Google Pay
     if (method === 'Google Pay') {
-        const params = `pa=${MERCHANT.upiId}&pn=${encodeURIComponent(MERCHANT.payeeName)}&cu=${MERCHANT.currency}&tn=${orderId}`;
+        const params = `pa=${merchantConfig.upiId}&pn=${encodeURIComponent(merchantConfig.payeeName)}&cu=${merchantConfig.currency}&tn=${orderId}`;
         return `tez://upi/pay?${params}`;
     }
 
     // BHIM UPI / generic fallback
-    const params = `pa=${MERCHANT.upiId}&pn=${encodeURIComponent(MERCHANT.payeeName)}&cu=${MERCHANT.currency}&tn=${orderId}`;
+    const params = `pa=${merchantConfig.upiId}&pn=${encodeURIComponent(merchantConfig.payeeName)}&cu=${merchantConfig.currency}&tn=${orderId}`;
     return `upi://pay?${params}`;
 }
 
@@ -93,6 +93,7 @@ export default function PaymentPage() {
     const [qrValue, setQrValue] = useState<string | null>(null);
     const [mobile, setMobile] = useState(true);
     const [countdown, setCountdown] = useState(12 * 60 + 30); // 12:30
+    const [merchantConfig, setMerchantConfig] = useState(MERCHANT);
 
     // Detect device
     useEffect(() => { setMobile(isMobile()); }, []);
@@ -106,8 +107,30 @@ export default function PaymentPage() {
         return () => clearInterval(t);
     }, []);
 
-    // Compute final price: base from cart if >0, else MERCHANT.basePriceRs
-    const base = cartTotal > 0 ? cartTotal : MERCHANT.basePriceRs;
+    // Fetch dynamic config
+    useEffect(() => {
+        const fetchConfig = async () => {
+            try {
+                const res = await fetch('/api/payment-config');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.upiId && data.merchantName) {
+                        setMerchantConfig(prev => ({
+                            ...prev,
+                            upiId: data.upiId,
+                            payeeName: data.merchantName
+                        }));
+                    }
+                }
+            } catch (e) {
+                console.error("Failed to fetch payment config", e);
+            }
+        };
+        fetchConfig();
+    }, []);
+
+    // Compute final price: base from cart if >0, else merchantConfig.basePriceRs
+    const base = cartTotal > 0 ? cartTotal : merchantConfig.basePriceRs;
     const finalPrice = calcFinalPrice(base, selectedOpt.discountPct);
     const savedAmount = base - finalPrice;
 
@@ -117,7 +140,7 @@ export default function PaymentPage() {
     };
 
     const handlePay = () => {
-        const url = buildDeepLink(selectedOpt.name, finalPrice);
+        const url = buildDeepLink(selectedOpt.name, finalPrice, merchantConfig);
 
         if (selectedOpt.id === 'bhim_upi' || !mobile) {
             // Show QR code
@@ -126,7 +149,7 @@ export default function PaymentPage() {
         }
 
         // Mobile: try specific app, fall back to generic upi:// after 1.5s
-        const genericUrl = `upi://pay?pa=${MERCHANT.upiId}&pn=${encodeURIComponent(MERCHANT.payeeName)}&cu=${MERCHANT.currency}&tn=TXN_${Date.now()}`;
+        const genericUrl = `upi://pay?pa=${merchantConfig.upiId}&pn=${encodeURIComponent(merchantConfig.payeeName)}&cu=${merchantConfig.currency}&tn=TXN_${Date.now()}`;
 
         if (url !== genericUrl) {
             const fallbackTimer = setTimeout(() => {
@@ -251,7 +274,7 @@ export default function PaymentPage() {
                             <div className="bg-white p-3 rounded-lg shadow border">
                                 <QRCodeSVG value={qrValue} size={180} includeMargin />
                             </div>
-                            <p className="text-[11px] text-gray-400 mt-2">UPI ID: {MERCHANT.upiId}</p>
+                            <p className="text-[11px] text-gray-400 mt-2">UPI ID: {merchantConfig.upiId}</p>
                             <button onClick={() => setQrValue(null)} className="mt-3 text-[#2874f0] text-[13px] underline">
                                 Close QR
                             </button>
